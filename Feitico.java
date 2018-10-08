@@ -2,8 +2,31 @@ package rpgcommvc;
 
 public class Feitico {
 
-    Feitico(String nome, int nivel) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private final String nome;
+
+    private final int dano;
+
+    private final int nivel;
+
+    private final TipoElemento tipoElemento;
+    
+    Feitico(String nome, TipoElemento tipoElemento, int nivel) {
+        this.nome = nome;
+        this.nivel = nivel;
+        int vida = (4*nivel)+16;
+        this.dano = (int) ((Math.random() * ((0.30*vida - 0.15*vida) + 1)) + 0.15*vida);
+        this.tipoElemento = tipoElemento;
     }
+
+    public String getNome(){
+        return nome;
+    }
+    public int getDano(){
+        return dano;
+    }
+    public TipoElemento getTipoElemento(){
+        return tipoElemento;
+    }
+    
     
 }
