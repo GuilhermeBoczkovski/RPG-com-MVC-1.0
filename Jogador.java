@@ -103,6 +103,12 @@ public class Jogador extends Ser implements IJogador {
     public ArrayList<Feitico> getFeiticos() {
         return this.feiticos;
     }
+    public Bolsa getBolsa(){
+        return this.bolsa;
+    }
+    public Feitico getFeitico(int i){
+        return this.feiticos.get(i);
+    }
 /*------------SET--------------*/
     public void setNivel(double nivel) {
         this.nivel = nivel;

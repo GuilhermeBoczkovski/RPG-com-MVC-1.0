@@ -1,49 +1,53 @@
-public class ControladorBatalhaBoss {
+package rpgcommvc;
 
-	private TelaBatalhaBoss telaBatalhaBoss;
+class ControladorBatalhaBoss {
 
-	private ControladorEncontro controladorEncontro;
+    private ControladorEncontro controladorEncontro;
+    private Monstro monstro;
+    private TelaBatalha telaBatalha;
+    
+    public void atacar(ConteudoTelaBatalha conteudoTela) {
 
-	private TelaFim telaFim;
+    }
 
-	private TelaFim telaFim;
+    public void analisarMonstro() {
 
-	private TelaFimBoss telaFimBoss;
+    }
 
-	public void atacar() {
+    public void verItens() {
 
-	}
+    }
 
-	public void analisarMonstro() {
+    public void verFeiticos(ConteudoTelaBatalha tipoInt) {
 
-	}
+    }
 
-	public void verItens() {
+    public void executaOpcao(int opcao1) {
 
-	}
+    }
 
-	public void verFeiticos() {
+    public ControladorBatalhaBoss() {
 
-	}
+    }
 
-	public void executaOpcao(int opcao1) {
+    public void finalizaBatalha() {
 
-	}
+    }
 
-	public void ControladorBatalhaBoss() {
+    public void iniciaEncontro() {
 
-	}
+    }
 
-	public void finalizaBatalha() {
+    public ConteudoTelaBatalha compactar(int vidaJogador, int ataqueJogador, int vidaMonstro, int ataqueMonstro) {
+            return null;
+    }
 
-	}
+    public ConteudoTelaBatalha[] compactar(Item[] itens) {
+            return null;
+    }
 
-	public void iniciaEncontro() {
-
-	}
-
-	public void gameOver() {
-
-	}
-
+    void gameOver(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
