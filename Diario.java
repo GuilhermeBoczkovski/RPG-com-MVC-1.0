@@ -6,6 +6,10 @@ public class Diario {
     
     private ArrayList<TipoEvento> eventos;
     
+    public Diario(){
+        this.eventos = new ArrayList();
+    }
+    
     public ArrayList<TipoEvento> verEventos(){
         return this.eventos;
     }

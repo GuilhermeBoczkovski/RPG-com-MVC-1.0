@@ -1,4 +1,4 @@
-package rpg_jaaj;
+package rpgcommvc;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,7 +35,7 @@ class ControladorBau extends TelaEncontro{
         int grimorio = randGrimorio.nextInt(2);
         switch(arma){
             case 0: break;
-            case 1: Arma armaBau = new Arma(jogador.getNivel());
+            case 1: Arma armaBau = new Arma(jogador.getNivelInt());
                     this.armaBau = armaBau;
                     temArma = true;
                     break;

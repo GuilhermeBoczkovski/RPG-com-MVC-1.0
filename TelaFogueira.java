@@ -1,4 +1,4 @@
-package rpg_jaaj;
+package rpgcommvc;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +18,7 @@ public class TelaFogueira extends TelaEncontro{
         System.out.println("5 - criar feitico");
         System.out.println("6 - esquecer feitico");
         System.out.println("7 - sair");
-        if(ctrlFogueira.jogador.isPossuiChave()){
+        if(ctrlFogueira.jogador.getPossuiChave()){
             System.out.println("8 - ir para a sala do boss");
         }
         int opcao = input.nextInt();

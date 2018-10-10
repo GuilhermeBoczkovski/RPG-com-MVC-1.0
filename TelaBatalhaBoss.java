@@ -39,14 +39,14 @@ public class TelaBatalhaBoss {
         System.out.println("O poderoso Demogorgon, mostro que aterrorizou por décadas todo o reino, finalmente cai ao chão!");
         System.out.println("continuar... [ENTER]");
         this.teclado.nextLine();
-        this.controladorBatalhaBoss.gameOver(true);
+        this.controladorBatalhaBoss.gameOver();
     }
 
     public void mostraAnalise(ConteudoTelaBatalha monstro){
         System.out.println("--ANÁLISE DO MONSTRO--");
         System.out.println("VIDA: " + monstro.monstro.getVidaAtual() + "/" +
                 monstro.monstro.getVidaTotal());
-        System.out.println("ELEMENTO: " + monstro.monstro.gettipoElemento);
+        System.out.println("ELEMENTO: " + monstro.monstro.getTipoElemento());
         System.out.println("FORÇA: " + monstro.monstro.getForca());
         System.out.println("ESQUIVA: " + monstro.monstro.getEsquiva());
         System.out.println("continuar... [ENTER]");
@@ -58,13 +58,13 @@ public class TelaBatalhaBoss {
         System.out.println("Os Consumíveis são:");
         for(int i = 0; i < conteudoTelaS.size(); i++){
             System.out.println("Índice:        " + i);
-            System.out.println("Nome:          " + conteudoTelaS.get(i).item.getNome());
-            System.out.println("Ação:          " + conteudoTelaS.get(i).item.getAcao());
-            System.out.println("Valor da ação: +" + conteudoTelaS.get(i).item.getValorAcao());
+            System.out.println("Nome:          " + conteudoTelaS.get(i).consumivel.getNome());
+            System.out.println("Ação:          " + conteudoTelaS.get(i).consumivel.getAcao());
+            System.out.println("Valor da ação: +" + conteudoTelaS.get(i).consumivel.getValorAcao());
         }
         System.out.println("Sua arma é: ");
-        System.out.println("Nome: " + conteudoTela.item.getNome());
-        System.out.println("Dano: +" + conteudoTela.item.getDano());
+        System.out.println("Nome: " + conteudoTela.arma.getNome());
+        System.out.println("Dano: +" + conteudoTela.arma.getDano());
         this.mostraMenuBatalha();
     }
 
@@ -79,7 +79,7 @@ public class TelaBatalhaBoss {
         this.mostraMenuBatalha();
     }
 
-    public void mostraMenuFeitico(){
+    public void mostraMenuFeitico()throws Exception{
         System.out.println("1- Feitiços elemento FOGO");
         System.out.println("2- Feitiços elemento ÁGUA");
         System.out.println("3- Feitiços elemento GRAMA");
@@ -93,9 +93,9 @@ public class TelaBatalhaBoss {
     public void mostraMenuAtaque(){
         System.out.println("Qual feitiço gostaria de usar?");
         System.out.println("(digite o indice do feitiço)");
-        int nomeFeitico = teclado.nextInt();
+        int indiceFeitico = teclado.nextInt();
         ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
-        conteudoTela.nomeFeitico = nomeFeitico;
+        conteudoTela.indiceFeitico = indiceFeitico;
         this.controladorBatalhaBoss.atacar(conteudoTela);
     }
     

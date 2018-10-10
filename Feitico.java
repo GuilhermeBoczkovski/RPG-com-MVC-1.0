@@ -10,7 +10,7 @@ public class Feitico {
 
     private final TipoElemento tipoElemento;
     
-    Feitico(String nome, TipoElemento tipoElemento, int nivel) {
+    Feitico(int nivel, String nome, TipoElemento tipoElemento) {
         this.nome = nome;
         this.nivel = nivel;
         int vida = (4*nivel)+16;

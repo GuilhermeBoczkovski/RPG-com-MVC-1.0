@@ -6,9 +6,9 @@ public interface IJogador {
     
     public ArrayList<Feitico> verFeiticos(TipoElemento tipo);
     
-    public void addFeitico(String nome, int tipo);
+    public void addFeitico(Feitico feitico);
     
-    public void delFeitico(String nome);
+    public void delFeitico(String nome) throws FeiticoNaoListadoException;
     
     public void trocaArma(Arma arma);
 }

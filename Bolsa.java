@@ -1,4 +1,4 @@
-package rpg_jaaj;
+package rpgcommvc;
 
 import java.util.ArrayList;
 import java.util.List;

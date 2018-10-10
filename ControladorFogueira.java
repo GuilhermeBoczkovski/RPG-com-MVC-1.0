@@ -1,4 +1,4 @@
-package rpg_jaaj;
+package rpgcommvc;
 import java.util.ArrayList;
 
 public class ControladorFogueira {
@@ -35,7 +35,7 @@ public class ControladorFogueira {
                     break;
             case 7: telaFogueira.mostraFimFogueira();
                     break;
-            case 8: if(jogador.isPossuiChave()){irParaBoss();}
+            case 8: if(jogador.getPossuiChave()){irParaBoss();}
                     else{telaFogueira.mostraMenuFogueira();}
                     break;
         }
@@ -55,19 +55,18 @@ public class ControladorFogueira {
     }
     
     public void criarFeitico(String nome, int tipo){
-        int conta = 5;
         Feitico feitico;
         switch(tipo){
-            case 1: feitico = new Feitico(conta, jogador.getNivel(), nome, TipoElemento.FOGO);
+            case 1: feitico = new Feitico(jogador.getNivelInt(), nome, TipoElemento.FOGO);
                     jogador.addFeitico(feitico);
                     break;
-            case 2: feitico = new Feitico(conta, jogador.getNivel(), nome, TipoElemento.AGUA);
+            case 2: feitico = new Feitico(jogador.getNivelInt(), nome, TipoElemento.AGUA);
                     jogador.addFeitico(feitico);
                     break;
-            case 3: feitico = new Feitico(conta, jogador.getNivel(), nome, TipoElemento.GRAMA);
+            case 3: feitico = new Feitico(jogador.getNivelInt(), nome, TipoElemento.GRAMA);
                     jogador.addFeitico(feitico);
                     break;
-            case 4: feitico = new Feitico(conta, jogador.getNivel(), nome, TipoElemento.PEDRA);
+            case 4: feitico = new Feitico(jogador.getNivelInt(), nome, TipoElemento.PEDRA);
                     jogador.addFeitico(feitico);
                     break;
         }
@@ -89,7 +88,7 @@ public class ControladorFogueira {
     }
     
     public void esquecerFeitico(int escolha){
-        jogador.dellFeitico(escolha);
+        jogador.delFeitico(escolha);
     }
     
     public void descartarItem(int escolha){

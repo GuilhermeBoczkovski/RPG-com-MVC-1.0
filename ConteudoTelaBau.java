@@ -1,4 +1,4 @@
-package rpg_jaaj;
+package rpgcommvc;
 
 public class ConteudoTelaBau {
     public Item item;

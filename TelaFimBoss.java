@@ -5,11 +5,11 @@ import java.util.Scanner;
 public class TelaFimBoss {
     
     private Scanner teclado;
-    private ControladorEncontro controladorEncontro;
+    private ControladorPrincipal controladorPrincipal;
     
-    public TelaFimBoss(ControladorEncontro controladorEncontro){
+    public TelaFimBoss(ControladorPrincipal controladorPrincipal){
         //this.teclado = new Scanner(System.in);
-        this.controladorEncontro = controladorEncontro;
+        this.controladorPrincipal = controladorPrincipal;
     }
     
     public void mostraTelaFim(boolean venceu){

@@ -1,4 +1,4 @@
-package rpg_jaaj;
+package rpgcommvc;
 
 public class Consumivel extends Item{
     
@@ -24,5 +24,13 @@ public class Consumivel extends Item{
     
     public String aumentaDano(){
         return "vai mesmo ser usado?";
+    }
+
+    String getAcao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    String getValorAcao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

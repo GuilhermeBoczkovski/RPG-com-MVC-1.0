@@ -5,9 +5,6 @@ import java.util.ArrayList;
 public class Jogador extends Ser implements IJogador {
     
     private double nivel;
-    private final String nome;
-    private int vidaAtual;
-    private int vidaTotal;
     private boolean possuiChave;
     private int esquiva;
     private int grimorios;
@@ -17,27 +14,27 @@ public class Jogador extends Ser implements IJogador {
     private final Bolsa bolsa = new Bolsa();
 
     public Jogador(String nome) {
+        super(nome);
         this.nivel = 1.5;
-        this.nome = nome;
-        this.vidaAtual = 10+(this.getNivelInt()*10);
-        this.vidaTotal = 10+(this.getNivelInt()*10);
+        super.setVidaAtual(10+(this.getNivelInt()*10));
+        super.setVidaTotal(10+(this.getNivelInt()*10));
         this.possuiChave = false;
         this.esquiva = 10;
         this.grimorios = 0;
         this.diario = new Diario();
-        this.feiticos.add(new Feitico("Pedregulhos Sinistros", TipoElemento.PEDRA, this.nivel));
+        this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
     }
 
-    public Jogador(int nivel, String nome) {
+    public Jogador(int nivel, String nome){
+        super(nome);
         this.nivel = nivel;
-        this.nome = nome;
-        this.vidaAtual = 10+(10*nivel);
-        this.vidaTotal = 10+(10*nivel);
+        super.setVidaAtual(10+(10*nivel));
+        super.setVidaTotal(10+(10*nivel));
         this.possuiChave = false;
         this.esquiva = 10;
         this.grimorios = 0;
         this.diario = new Diario();
-        this.feiticos.add(new Feitico("Pedregulhos Sinistros", TipoElemento.PEDRA, this.nivel));
+        this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
     }
     
     public ArrayList<Feitico> verFeiticos(TipoElemento tipo){
@@ -48,7 +45,7 @@ public class Jogador extends Ser implements IJogador {
         this.feiticos.add(feitico);
     }
     
-    public void delFeitico(String nome){
+    public void delFeitico(String nome) throws FeiticoNaoListadoException{
         boolean existe = false;
         for(Feitico feitico : feiticos){
             if(feitico.getNome().equals(nome)){
@@ -60,6 +57,10 @@ public class Jogador extends Ser implements IJogador {
         if(!existe){
             throw new FeiticoNaoListadoException();
         }
+    }
+    
+    public void delFeitico(int indice){
+        feiticos.remove(indice);
     }
     
     public void trocaArma(Arma arma){
@@ -75,15 +76,6 @@ public class Jogador extends Ser implements IJogador {
     }
     public int getNivelInt() {
         return (int)this.nivel;
-    }
-    public String getNome() {
-        return this.nome;
-    }
-    public int getVidaAtual() {
-        return this.vidaAtual;
-    }
-    public int getVidaTotal() {
-        return this.vidaTotal;
     }
     public boolean getPossuiChave() {
         return this.possuiChave;
@@ -113,12 +105,6 @@ public class Jogador extends Ser implements IJogador {
     public void setNivel(double nivel) {
         this.nivel = nivel;
     }
-    public void setVidaAtual(int vidaAtual) {
-        this.vidaAtual = vidaAtual;
-    }
-    public void setVidaTotal(int vidaTotal) {
-        this.vidaTotal = vidaTotal;
-    }
     public void setPossuiChave(boolean possuiChave) {
         this.possuiChave = possuiChave;
     }
@@ -133,5 +119,9 @@ public class Jogador extends Ser implements IJogador {
     }
     public void setFeiticos(ArrayList<Feitico> feiticos) {
         this.feiticos = feiticos;
+    }
+
+    void usarItem(int indice) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

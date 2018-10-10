@@ -1,4 +1,4 @@
-package rpg_jaaj;
+package rpgcommvc;
 import java.util.Random;
 
 public class ControladorPrincipal {
@@ -8,7 +8,6 @@ public class ControladorPrincipal {
     private ControladorFogueira ctrlFogueira;
     private ControladorBau ctrlBau;
     private ControladorBatalhaBoss ctrlBatBoss;
-    private TelaInicio telaInicio;
     private TelaFim telaFim;
     
     public ControladorPrincipal(String nome){
@@ -17,7 +16,6 @@ public class ControladorPrincipal {
         ctrlFogueira = new ControladorFogueira(this);
         ctrlBau = new ControladorBau(this);
         ctrlBatBoss = new ControladorBatalhaBoss(this);
-        telaInicio = new TelaInicio(this);
         telaFim = new TelaFim(this);
 
     }
@@ -26,7 +24,7 @@ public class ControladorPrincipal {
         return this.jogador;
     }
 
-    public void escolheEncontro() {
+    public void escolheEncontro()  throws Exception{
         Random rand = new Random();
         int escolha = rand.nextInt(3);
         switch(escolha){
@@ -49,10 +47,6 @@ public class ControladorPrincipal {
     
     public void gameOver(){
         telaFim.mostraTelaFim();
-    }
-    
-    public void inicio(){
-        telaInicio.mostraTelaInicio();
     }
     
     public void criaJogador(String nome){
