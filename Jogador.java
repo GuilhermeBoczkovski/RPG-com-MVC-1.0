@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 
 import java.util.ArrayList;
 
@@ -23,6 +23,8 @@ public class Jogador extends Ser implements IJogador {
         this.grimorios = 0;
         this.diario = new Diario();
         this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
+        this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
+        this.feiticos.add(new Feitico(this.getNivelInt(), "FOGO Sinistros", TipoElemento.FOGO));
     }
 
     public Jogador(int nivel, String nome){
@@ -38,24 +40,34 @@ public class Jogador extends Ser implements IJogador {
     }
     
     public ArrayList<Feitico> verFeiticos(TipoElemento tipo){
-        return new ArrayList<Feitico>();
+        ArrayList<Feitico> feiticosDoTipo = new ArrayList();
+        for(Feitico feitico : feiticos){
+            if(feitico.getTipoElemento() == tipo){
+                feiticosDoTipo.add(feitico);
+            }
+        }
+        return feiticosDoTipo;
     }
     
     public void addFeitico(Feitico feitico){
         this.feiticos.add(feitico);
     }
     
-    public void delFeitico(String nome) throws FeiticoNaoListadoException{
+    public void delFeitico(String nome){
         boolean existe = false;
-        for(Feitico feitico : feiticos){
-            if(feitico.getNome().equals(nome)){
-                existe = true;
-                feiticos.remove(feitico);
-                break;
+        try{
+            for(Feitico feitico : feiticos){
+                if(feitico.getNome().equals(nome)){
+                    existe = true;
+                    feiticos.remove(feitico);
+                    break;
+                }
             }
-        }
-        if(!existe){
-            throw new FeiticoNaoListadoException();
+            if(!existe){
+                throw new FeiticoNaoListadoException();
+            }
+        }catch(Exception e){
+            e.getMessage();
         }
     }
     

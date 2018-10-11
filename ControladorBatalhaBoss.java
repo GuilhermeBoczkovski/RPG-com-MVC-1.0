@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 
 import java.util.ArrayList;
 
@@ -67,28 +67,32 @@ class ControladorBatalhaBoss {
         this.telaBatalha.mostraItens(conteudoTelaS, conteudoTela);
     }
 
-    public void verFeiticos(ConteudoTelaBatalha conteudoTela) throws NumeroInvalidoException{
-        TipoElemento tipoElemento;
-        switch(conteudoTela.tipoInt){
-            case 1 :
-                tipoElemento = TipoElemento.FOGO;
-                break;
-            case 2 :
-                tipoElemento = TipoElemento.AGUA;
-                break;
-            case 3 :
-                tipoElemento = TipoElemento.GRAMA;
-                break;
-            case 4 :
-                tipoElemento = TipoElemento.PEDRA;
-                break;
-            default :
-                throw new NumeroInvalidoException();
+    public void verFeiticos(ConteudoTelaBatalha conteudoTela){
+        try{
+            TipoElemento tipoElemento;
+            switch(conteudoTela.tipoInt){
+                case 1 :
+                    tipoElemento = TipoElemento.FOGO;
+                    break;
+                case 2 :
+                    tipoElemento = TipoElemento.AGUA;
+                    break;
+                case 3 :
+                    tipoElemento = TipoElemento.GRAMA;
+                    break;
+                case 4 :
+                    tipoElemento = TipoElemento.PEDRA;
+                    break;
+                default :
+                    throw new NumeroInvalidoException();
+            }
+            this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
+        }catch(Exception e){
+            System.out.println(e);
         }
-        this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
     }
 
-    public void executaOpcao(int opcao1) throws Exception{
+    public void executaOpcao(int opcao1){
         switch(opcao1){
             case 1 :
                 this.telaBatalha.mostraMenuAtaque();

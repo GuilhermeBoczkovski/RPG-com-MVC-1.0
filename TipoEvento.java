@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 
 public enum TipoEvento {
     FOGUEIRA,

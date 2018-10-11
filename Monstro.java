@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 
 public class Monstro extends Ser{
     private int forca;
@@ -8,8 +8,8 @@ public class Monstro extends Ser{
     public Monstro(int nivel , TipoElemento tipoElemento) {
         super("Monstro nivel: " + nivel);
         super.setVidaAtual(10+(10*nivel));
-        this.forca = (int)(Math.random()*((0.2 * super.getVidaTotal() - 0.10*super.getVidaTotal()) + 1));
         super.setVidaTotal(10+(10*nivel));
+        this.forca = (int)((Math.random()*((0.2*super.getVidaTotal() - 0.10*super.getVidaTotal()) + 1))+0.10*20);
         this.esquiva = 1.5 * nivel;
         this.tipoElemento = tipoElemento;
     }

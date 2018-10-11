@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,7 +57,7 @@ public class TelaFogueira extends TelaEncontro{
     }
     
     public void mostraMenuVerFeiticos(){
-        System.out.println("escolha o tipo de feitico para ver:");
+        System.out.println("Escolha o tipo de feitico para ver:");
         System.out.println("1 - FOGO");
         System.out.println("2 - AGUA");
         System.out.println("3 - GRAMA");
@@ -122,7 +122,8 @@ public class TelaFogueira extends TelaEncontro{
     }
     
     public void mostraFimFogueira(){
-        System.out.println("voce pega suas coisas e continua seu caminho...");
+        System.out.println("Voce pega suas coisas e continua seu caminho...");
+        System.out.println("=========================");
         ctrlFogueira.finalizaFogueira();
     }
     

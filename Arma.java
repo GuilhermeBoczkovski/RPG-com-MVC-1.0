@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 
 public class Arma extends Item{
     private int dano;

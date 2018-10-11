@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 
 public class ControladorGeral {
     
@@ -10,10 +10,14 @@ public class ControladorGeral {
     }
     
     public void inicio(){
-        telaInicio.mostraTelaInicio();
+        try{
+            telaInicio.mostraTelaInicio();
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }
 
-    void play(String nome) {
+    void play(String nome){
         this.controladorPrincipal = new ControladorPrincipal(nome);
         this.controladorPrincipal.escolheEncontro();
     }

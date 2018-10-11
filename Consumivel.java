@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 
 public class Consumivel extends Item{
     

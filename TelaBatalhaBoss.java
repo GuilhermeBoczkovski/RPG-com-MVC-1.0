@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -79,7 +79,7 @@ public class TelaBatalhaBoss {
         this.mostraMenuBatalha();
     }
 
-    public void mostraMenuFeitico()throws Exception{
+    public void mostraMenuFeitico(){
         System.out.println("1- Feitiços elemento FOGO");
         System.out.println("2- Feitiços elemento ÁGUA");
         System.out.println("3- Feitiços elemento GRAMA");

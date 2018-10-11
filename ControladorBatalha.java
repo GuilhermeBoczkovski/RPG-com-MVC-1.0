@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,8 @@ class ControladorBatalha {
     private Monstro monstro;
     private TelaBatalha telaBatalha;
 
-    public ControladorBatalha(ControladorPrincipal controladorPrincipal) {
+    public ControladorBatalha(ControladorPrincipal controladorPrincipal){
+        this.telaBatalha = new TelaBatalha(this);
         this.controladorPrincipal = controladorPrincipal;
         TipoElemento tipoElemento = TipoElemento.AGUA;
         /*CORRIGIR PROBABILIDADE DO TIPO ELEMENTO*/
@@ -16,9 +17,11 @@ class ControladorBatalha {
         
     }
     
-    public void atacar(ConteudoTelaBatalha conteudoTela) throws Exception{
+    public void atacar(ConteudoTelaBatalha conteudoTela){
+System.out.println("antes de pegar feitico");
         ConteudoTelaBatalha conteudoTelaAtaqueJogador = new ConteudoTelaBatalha();
         Feitico feitico = this.controladorPrincipal.getJogador().getFeitico(conteudoTelaAtaqueJogador.indiceFeitico);
+System.out.println("depois de pegar feitico");
         conteudoTelaAtaqueJogador.feitico = feitico;
         int danoDoJogador = feitico.getDano();
         danoDoJogador += this.controladorPrincipal.getJogador().getArma().getDano();
@@ -48,16 +51,16 @@ class ControladorBatalha {
         }
     }
     
-    public void finalizaBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador) throws Exception{
+    public void finalizaBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador){
         this.telaBatalha.mostraFimBatalha(conteudoTelaAtaqueJogador);
     }
 
-    public void analisarMonstro()  throws Exception{
+    public void analisarMonstro(){
         ConteudoTelaBatalha conteudoTela = compactar(this.monstro);
         this.telaBatalha.mostraAnalise(conteudoTela);
     }
 
-    public void verItens() throws Exception{
+    public void verItens(){
         Arma arma = this.controladorPrincipal.getJogador().getArma();
         ArrayList<Consumivel> consumiveis = this.controladorPrincipal.getJogador().getBolsa().verConsumiveis();
         ArrayList<ConteudoTelaBatalha> conteudoTelaS = new ArrayList();
@@ -68,28 +71,33 @@ class ControladorBatalha {
         this.telaBatalha.mostraItens(conteudoTelaS, conteudoTela);
     }
 
-    public void verFeiticos(ConteudoTelaBatalha conteudoTela) throws NumeroInvalidoException{
-        TipoElemento tipoElemento;
-        switch(conteudoTela.tipoInt){
-            case 1 :
-                tipoElemento = TipoElemento.FOGO;
-                break;
-            case 2 :
-                tipoElemento = TipoElemento.AGUA;
-                break;
-            case 3 :
-                tipoElemento = TipoElemento.GRAMA;
-                break;
-            case 4 :
-                tipoElemento = TipoElemento.PEDRA;
-                break;
-            default :
-                throw new NumeroInvalidoException();
+    public void verFeiticos(ConteudoTelaBatalha conteudoTela){
+        try{
+            TipoElemento tipoElemento;
+            switch(conteudoTela.tipoInt){
+                case 1 :
+                    tipoElemento = TipoElemento.FOGO;
+                    break;
+                case 2 :
+                    tipoElemento = TipoElemento.AGUA;
+                    break;
+                case 3 :
+                    tipoElemento = TipoElemento.GRAMA;
+                    break;
+                case 4 :
+                    tipoElemento = TipoElemento.PEDRA;
+                    break;
+                default :
+                    throw new NumeroInvalidoException();
+            }
+            ArrayList<Feitico> feiticos = this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
+            ArrayList<ConteudoTelaBatalha> conteudoTelaS = this.compactar(feiticos);
+        }catch(Exception e){
+            e.getMessage();
         }
-        this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
     }
 
-    public void executaOpcao(int opcao1) throws Exception{
+    public void executaOpcao(int opcao1){
         switch(opcao1){
             case 1 :
                 this.telaBatalha.mostraMenuAtaque();
@@ -112,8 +120,8 @@ class ControladorBatalha {
         }
     }
     
-    public void iniciaEncontro()  throws Exception{
-        this.telaBatalha.mostraMenuBatalha();
+    public void iniciaEncontro(){
+        this.telaBatalha.mostraInicioBatalha();
     }
 
     public ConteudoTelaBatalha compactar(Ser atacado, Ser atacante, int danoAtaque) {
@@ -141,7 +149,7 @@ class ControladorBatalha {
         return conteudoTela;
     }
     
-    public void usarItem(int indice) throws Exception{
+    public void usarItem(int indice){
         this.controladorPrincipal.getJogador().usarItem(indice);
         this.telaBatalha.mostraMenuBatalha();
     }
@@ -155,6 +163,16 @@ class ControladorBatalha {
 
     public void gameOver() {
         this.controladorPrincipal.gameOver();
+    }
+
+    private ArrayList<ConteudoTelaBatalha> compactar(ArrayList<Feitico> feiticos) {
+        ArrayList<ConteudoTelaBatalha> conteudoTelaS = new ArrayList();
+        for(Feitico feitico : feiticos){
+            ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
+            conteudoTela.feitico = feitico;
+            conteudoTelaS.add(conteudoTela);
+        }
+        return conteudoTelaS;
     }
     
 }

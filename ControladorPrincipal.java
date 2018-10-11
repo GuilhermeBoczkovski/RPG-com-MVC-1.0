@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 import java.util.Random;
 
 public class ControladorPrincipal {
@@ -24,7 +24,7 @@ public class ControladorPrincipal {
         return this.jogador;
     }
 
-    public void escolheEncontro()  throws Exception{
+    public void escolheEncontro(){
         Random rand = new Random();
         int escolha = rand.nextInt(3);
         switch(escolha){

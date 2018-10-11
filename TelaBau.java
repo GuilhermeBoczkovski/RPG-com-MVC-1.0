@@ -1,4 +1,4 @@
-package rpgcommvc;
+package rpgcommvvc;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -50,7 +50,8 @@ public class TelaBau {
         if(itens.temGrimorio){
             mensagem = "pega o grimorio e ";
         }
-        System.out.println("voce " + mensagem + "sai da sala e continua a jornada...");
+        System.out.println("Voce " + mensagem + "sai da sala e continua a jornada...");
+        System.out.println("========================================");
         ctrlBau.finalizaBau();
     }
     
@@ -71,7 +72,7 @@ public class TelaBau {
         input.nextLine();
         switch(escolha){
             case 1: ctrlBau.pegarConsumivel();
-                    System.out.println("voce Pegou o consumivel..");
+                    System.out.println("Voce Pegou o consumivel..");
                     mostraMenu(itens);
                     break;
             case 2: mostraMenu(itens);
