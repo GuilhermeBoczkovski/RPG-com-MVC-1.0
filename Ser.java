@@ -1,4 +1,4 @@
-package rpgcommvvc;
+package rpgcommvc;
 
 class Ser {
     private final String nome;

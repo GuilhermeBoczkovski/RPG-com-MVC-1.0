@@ -1,9 +1,9 @@
-package rpgcommvvc;
+package rpgcommvc;
 import java.util.ArrayList;
 
 public class ControladorFogueira {
     private TelaFogueira telaFogueira;
-    public Jogador jogador;
+    private Jogador jogador;
     private ArrayList<Consumivel> itens;
     private ControladorPrincipal ctrlEncontro;
     private ArrayList<TipoEvento> eventos;
@@ -20,24 +20,30 @@ public class ControladorFogueira {
     
     
     public void executaOpcao(int opcao){
-        switch(opcao){
-            case 1: verDiario();
-                    break;
-            case 2: verItens();
-                    break;
-            case 3: telaFogueira.mostraMenuDescartarItem(compactarItem());
-                    break;
-            case 4: telaFogueira.mostraMenuVerFeiticos();
-                    break;
-            case 5: telaFogueira.mostraMenuCriarFeitico();
-                    break;
-            case 6: telaFogueira.mostraMenuEsquecerFeiticos(compactarFeitico());
-                    break;
-            case 7: telaFogueira.mostraFimFogueira();
-                    break;
-            case 8: if(jogador.getPossuiChave()){irParaBoss();}
-                    else{telaFogueira.mostraMenuFogueira();}
-                    break;
+        try{
+            switch(opcao){
+                case 1: verDiario();
+                        break;
+                case 2: verItens();
+                        break;
+                case 3: telaFogueira.mostraMenuDescartarItem(compactarItem());
+                        break;
+                case 4: telaFogueira.mostraMenuVerFeiticos();
+                        break;
+                case 5: telaFogueira.mostraMenuCriarFeitico();
+                        break;
+                case 6: telaFogueira.mostraMenuEsquecerFeiticos(compactarFeitico());
+                        break;
+                case 7: telaFogueira.mostraFimFogueira();
+                        break;
+                case 8: if(jogador.getPossuiChave()){irParaBoss();}
+                        else{telaFogueira.mostraMenuFogueira();}
+                        break;
+                default: throw new NumeroInvalidoException();
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            telaFogueira.mostraMenuFogueira();
         }
     }
     
@@ -74,17 +80,22 @@ public class ControladorFogueira {
     }
     
     public void verFeiticos(int tipo){
-        switch(tipo){
-            case 1: telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.FOGO));
-                    break;
-            case 2: telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.AGUA));
-                    break;
-            case 3: telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.GRAMA));
-                    break;
-            case 4: telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.PEDRA));
-                    break;
+        try{
+            switch(tipo){
+                case 1: telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.FOGO));
+                        break;
+                case 2: telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.AGUA));
+                        break;
+                case 3: telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.GRAMA));
+                        break;
+                case 4: telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.PEDRA));
+                        break;
+                default: throw new NumeroInvalidoException();
+            }
+        } catch(Exception e){
+            System.out.println(e.getMessage());
+            telaFogueira.mostraMenuVerFeiticos();
         }
-        
     }
     
     public void esquecerFeitico(int escolha){
@@ -102,6 +113,12 @@ public class ControladorFogueira {
     
     public void irParaBoss(){
         ctrlEncontro.irParaBoss();
+    }
+    
+    public ConteudoTelaFogueira compactaJogador(){
+        ConteudoTelaFogueira conteudo = new ConteudoTelaFogueira();
+        conteudo.jogador = this.jogador;
+        return conteudo;
     }
     
     public ArrayList<ConteudoTelaFogueira> compactarFeiticoPorTipo(TipoElemento tipo){

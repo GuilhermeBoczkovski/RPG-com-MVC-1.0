@@ -1,4 +1,4 @@
-package rpgcommvvc;
+package rpgcommvc;
 
 public class Consumivel extends Item{
     
@@ -22,10 +22,18 @@ public class Consumivel extends Item{
     }
     */
     
-    public String aumentaDano(){
-        return "vai mesmo ser usado?";
+    
+    /**
+     * retorna o dano a somar no jogador, vai ser usado?
+     * ideia:
+     * similar ao de vida, receber o dano do jogador
+     * @return int = valor a aumentar o dano
+     */
+    public int aumentaDano(){
+        return 10;
     }
-
+    
+    
     String getAcao() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

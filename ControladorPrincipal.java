@@ -1,4 +1,4 @@
-package rpgcommvvc;
+package rpgcommvc;
 import java.util.Random;
 
 public class ControladorPrincipal {
@@ -27,7 +27,7 @@ public class ControladorPrincipal {
     public void escolheEncontro(){
         Random rand = new Random();
         int escolha = rand.nextInt(3);
-        switch(escolha){
+        switch(2){
             case 0:
                     ctrlBatalha.iniciaEncontro();
                     break;

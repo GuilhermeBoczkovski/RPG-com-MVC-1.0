@@ -1,4 +1,4 @@
-package rpgcommvvc;
+package rpgcommvc;
 
 import java.util.ArrayList;
 

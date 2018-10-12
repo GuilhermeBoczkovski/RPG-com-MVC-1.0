@@ -1,4 +1,4 @@
-package rpgcommvvc;
+package rpgcommvc;
 
 public class Item {
     private String nome;

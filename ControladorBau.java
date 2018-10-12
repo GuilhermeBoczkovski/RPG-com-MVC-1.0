@@ -1,4 +1,4 @@
-package rpgcommvvc;
+package rpgcommvc;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,7 +23,7 @@ class ControladorBau extends TelaEncontro{
 
     public void iniciaEncontro() {
         geraItens();
-        telaBau.mostraAcharBau(compactarItensBoolean());
+        telaBau.mostraAcharBau();
     }
     
     public void geraItens(){
@@ -54,6 +54,7 @@ class ControladorBau extends TelaEncontro{
             case 1: temGrimorio = true;
                     break;
         }
+        
         if(!temArma && !temConsumivel && !temGrimorio){
             Consumivel consumivelBau = new Consumivel("Pocao");
             this.consumivelBau = consumivelBau;
@@ -61,16 +62,22 @@ class ControladorBau extends TelaEncontro{
         }
     }
 
-    public void executaOpcao(int escolha) {
-        switch(escolha){
-            case 0: telaBau.mostraFimBau(compactarItensBoolean());
-                    break;
-            case 1: telaBau.mostraItens(compactarItensJogador(), compactarItensBoolean());
-                    break;
-            case 2: compararArmas();
-                    break;
-            case 3: verItens();
-                    break;
+    public void executaOpcao(int escolha){
+        try{
+            switch(escolha){
+                case 0: telaBau.mostraFimBau();
+                        break;
+                case 1: telaBau.mostraItens(compactarItensJogador());
+                        break;
+                case 2: compararArmas();
+                        break;
+                case 3: verItens();
+                        break;
+                default: throw new NumeroInvalidoException();
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            telaBau.mostraMenu();
         }
 
     }
@@ -84,12 +91,12 @@ class ControladorBau extends TelaEncontro{
     }
     
     public void compararArmas() {
-        telaBau.mostraComparacao(compactarArmas(), compactarItensBoolean());
+        telaBau.mostraComparacao(compactarArmas());
     }
     
     public void trocarArma(){
         this.jogador.setArma(armaBau);
-        telaBau.mostraMenu(compactarItensBoolean());
+        telaBau.mostraMenu();
     }
     
     public void pegarConsumivel(){
