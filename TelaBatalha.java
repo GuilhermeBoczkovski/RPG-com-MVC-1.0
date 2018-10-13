@@ -14,6 +14,7 @@ public class TelaBatalha extends TelaEncontro{
     }
     
     public void mostraMenuBatalha(){
+        System.out.println("=============================");
         System.out.println("Qual a sua próxima ação?");
         System.out.println("1- Atacar Monstro (escolher feitiço)");
         System.out.println("2- Analizar Monstro");
@@ -26,16 +27,12 @@ public class TelaBatalha extends TelaEncontro{
     }
     
     public void mostraAtaque(ConteudoTelaBatalha conteudoTelaAtaqueJogador, ConteudoTelaBatalha conteudoTelaAtaqueMonstro){
-        System.out.println(conteudoTelaAtaqueJogador.atacante.getNome() + " ataca " + conteudoTelaAtaqueJogador.atacado.getNome());
+        System.out.println(conteudoTelaAtaqueJogador.atacante.getNome() + " ataca " + conteudoTelaAtaqueJogador.atacado.getNome() + " com " + conteudoTelaAtaqueJogador.feitico.getNome());
         System.out.println("Dano causado: " + conteudoTelaAtaqueJogador.danoAtaque);
         System.out.println("A vida do " + conteudoTelaAtaqueJogador.atacado.getNome() + " é: " + conteudoTelaAtaqueJogador.atacado.getVidaAtual() + "/" + conteudoTelaAtaqueJogador.atacado.getVidaTotal());
-        System.out.println("continuar... [ENTER]");
-        this.teclado.nextLine();
         System.out.println(conteudoTelaAtaqueMonstro.atacante.getNome() + " ataca " + conteudoTelaAtaqueMonstro.atacado.getNome());
         System.out.println("Dano causado: " + conteudoTelaAtaqueMonstro.danoAtaque);
         System.out.println("A vida do " + conteudoTelaAtaqueMonstro.atacado.getNome() + " é: " + conteudoTelaAtaqueMonstro.atacado.getVidaAtual() + "/" + conteudoTelaAtaqueMonstro.atacado.getVidaTotal());
-        System.out.println("continuar... [ENTER]");
-        this.teclado.nextLine();
         if(conteudoTelaAtaqueMonstro.atacado.getVidaAtual()>0){
             this.mostraMenuBatalha();
         }else{
@@ -47,9 +44,8 @@ public class TelaBatalha extends TelaEncontro{
         System.out.println("O herói defere um último feitiço de misericórdia no monstro!");
         System.out.println("Dano causado: " + conteudoTela.danoAtaque);
         System.out.println("O poderoso " + conteudoTela.atacado.getNome() + " finalmente cai ao chão!");
-        System.out.println("continuar... [ENTER]");
-        this.teclado.nextLine();
-        this.mostraMenuBatalha();
+        System.out.println("Você então segue seu caminho...");
+        System.out.println("");
     }
 
     public void mostraAnalise(ConteudoTelaBatalha monstro){
@@ -59,19 +55,21 @@ public class TelaBatalha extends TelaEncontro{
         System.out.println("ELEMENTO: " + monstro.monstro.getTipoElemento());
         System.out.println("FORÇA: " + monstro.monstro.getForca());
         System.out.println("ESQUIVA: " + monstro.monstro.getEsquiva() + "%");
-        System.out.println("========================================");
-        System.out.println("continuar... [ENTER]");
-        this.teclado.nextLine();
         this.mostraMenuBatalha();
     }
 
     public void mostraItens(ArrayList<ConteudoTelaBatalha> conteudoTelaS, ConteudoTelaBatalha conteudoTela){
-        System.out.println("Os Consumíveis são:");
-        for(int i = 0; i < conteudoTelaS.size(); i++){
-            System.out.println("Índice:        " + i);
-            System.out.println("Nome:          " + conteudoTelaS.get(i).consumivel.getNome());
-            System.out.println("Ação:          " + conteudoTelaS.get(i).consumivel.getAcao());
-            System.out.println("Valor da ação: +" + conteudoTelaS.get(i).consumivel.getValorAcao());
+        System.out.println("=============================");
+        if(conteudoTelaS.size()>0){
+            System.out.println("Os Consumíveis são:");
+            for(int i = 0; i < conteudoTelaS.size(); i++){
+                System.out.println("Índice:        " + i);
+                System.out.println("Nome:          " + conteudoTelaS.get(i).consumivel.getNome());
+                System.out.println("Ação:          " + conteudoTelaS.get(i).consumivel.getAcao());
+                System.out.println("Valor da ação: +" + conteudoTelaS.get(i).consumivel.getValorAcao());
+            }
+        }else{
+            System.out.println("Você não possui consumiveis");
         }
         System.out.println("Sua arma é: ");
         System.out.println("Nome: " + conteudoTela.arma.getNome());
@@ -80,9 +78,10 @@ public class TelaBatalha extends TelaEncontro{
     }
 
     public void mostraFeiticos(ArrayList<ConteudoTelaBatalha> conteudoTelaS){
+        System.out.println("=============================");
         System.out.println("Os Feitiços são:");
         for(int i = 0; i < conteudoTelaS.size(); i++){
-            System.out.println("Índice:   " + i);
+            System.out.println("Índice:   " + conteudoTelaS.get(i).feitico.getIndice());
             System.out.println("Nome:     " + conteudoTelaS.get(i).feitico.getNome());
             System.out.println("Dano:     " + conteudoTelaS.get(i).feitico.getDano());
             System.out.println("Elemento: " + conteudoTelaS.get(i).feitico.getTipoElemento());
@@ -91,6 +90,7 @@ public class TelaBatalha extends TelaEncontro{
     }
 
     public void mostraMenuFeitico(){
+        System.out.println("=============================");
         System.out.println("Escolha o tipo de feitico para ver:");
         System.out.println("1 - FOGO");
         System.out.println("2 - AGUA");
@@ -104,6 +104,7 @@ public class TelaBatalha extends TelaEncontro{
     }
 
     public void mostraMenuAtaque(){
+        System.out.println("=============================");
         System.out.println("Qual feitiço gostaria de usar?");
         System.out.println("(digite o indice do feitiço)");
         int indiceFeitico = teclado.nextInt();
@@ -113,6 +114,7 @@ public class TelaBatalha extends TelaEncontro{
     }
     
     public void mostraMenuItens(){
+        System.out.println("=============================");
         System.out.println("Qual item gostaria de usar?");
         System.out.println("(digite o indice do item)");
         int indiceItem = teclado.nextInt();
@@ -126,16 +128,15 @@ public class TelaBatalha extends TelaEncontro{
         System.out.println("NIVEL: " + jogador.getNivelInt());
         System.out.println("VIDA: " + jogador.getVidaAtual() + "/" + jogador.getVidaTotal());
         System.out.println("ESQUIVA: " + jogador.getEsquiva() + "%");
-        System.out.println("=============================");
         this.mostraMenuBatalha();
     }
 
     void mostraInicioBatalha() {
+        System.out.println("");
         System.out.println("Você entra numa sala escura...");
         System.out.println("Começa a entrar mais afundo na sala quando de repente");
         System.out.println("um monstro do tamanho de dois homens aparece na sua frente!!");
         System.out.println("Imediatamente você pega seu cajado e se prepara para a batalha");
-        System.out.println("========================================");
         this.mostraMenuBatalha();
     }
 }

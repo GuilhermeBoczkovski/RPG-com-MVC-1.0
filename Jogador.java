@@ -6,7 +6,7 @@ public class Jogador extends Ser implements IJogador {
     
     private double nivel;
     private boolean possuiChave;
-    private int esquiva;
+    private double esquiva;
     private int grimorios;
     private final Diario diario;
     private ArrayList<Feitico> feiticos = new ArrayList<>();
@@ -19,12 +19,14 @@ public class Jogador extends Ser implements IJogador {
         super.setVidaAtual(10+(this.getNivelInt()*10));
         super.setVidaTotal(10+(this.getNivelInt()*10));
         this.possuiChave = false;
-        this.esquiva = 10;
+        this.esquiva = 1.5;
         this.grimorios = 0;
         this.diario = new Diario();
         this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
-        this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
-        this.feiticos.add(new Feitico(this.getNivelInt(), "FOGO Sinistros", TipoElemento.FOGO));
+        this.feiticos.add(new Feitico(this.getNivelInt(), "AGUA Sinistros", TipoElemento.AGUA));
+        this.feiticos.add(new Feitico(this.getNivelInt(), "GRAMA Sinistros", TipoElemento.GRAMA));
+        this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.FOGO));
+        this.arma = new Arma(this.getNivelInt());
     }
 
     public Jogador(int nivel, String nome){
@@ -33,7 +35,7 @@ public class Jogador extends Ser implements IJogador {
         super.setVidaAtual(10+(10*nivel));
         super.setVidaTotal(10+(10*nivel));
         this.possuiChave = false;
-        this.esquiva = 10;
+        this.esquiva = 1.5 + 0.1*nivel;
         this.grimorios = 0;
         this.diario = new Diario();
         this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
@@ -80,8 +82,27 @@ public class Jogador extends Ser implements IJogador {
     }
     
     public void ganhaExperiencia(){
+        double nivelInicial = this.getNivelInt();
         this.nivel = nivel + 2/nivel;
+        if(nivel-nivelInicial >=1){
+            this.setEsquiva(this.getEsquiva()+0.1);
+            this.setVidaTotal(10+(this.getNivelInt()*10));
+            this.setVidaAtual(this.getVidaTotal());
+        }
     }
+    
+    public void usarItem(int indice) {
+        Consumivel item = this.bolsa.getConsumivel(indice);
+        int vidaExtra = item.restauraVida();
+        this.bolsa.dellConsumivel(indice);
+        
+        this.setVidaAtual(this.getVidaAtual() + vidaExtra);
+        
+        if(this.getVidaAtual()>this.getVidaTotal()){
+            this.setVidaAtual(this.getVidaTotal());
+        }
+    }
+    
 /*------------GET-------------*/
     public double getNivel() {
         return this.nivel;
@@ -92,7 +113,7 @@ public class Jogador extends Ser implements IJogador {
     public boolean getPossuiChave() {
         return this.possuiChave;
     }
-    public int getEsquiva() {
+    public double getEsquiva() {
         return this.esquiva;
     }
     public int getGrimorios() {
@@ -120,7 +141,7 @@ public class Jogador extends Ser implements IJogador {
     public void setPossuiChave(boolean possuiChave) {
         this.possuiChave = possuiChave;
     }
-    public void setEsquiva(int esquiva) {
+    public void setEsquiva(double esquiva) {
         this.esquiva = esquiva;
     }
     public void setGrimorios(int grimorios) {
@@ -133,7 +154,5 @@ public class Jogador extends Ser implements IJogador {
         this.feiticos = feiticos;
     }
 
-    void usarItem(int indice) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 }
