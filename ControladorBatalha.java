@@ -53,6 +53,8 @@ System.out.println("depois de pegar feitico");
     
     public void finalizaBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador){
         this.telaBatalha.mostraFimBatalha(conteudoTelaAtaqueJogador);
+        this.controladorPrincipal.escolheEncontro();
+        
     }
 
     public void analisarMonstro(){
@@ -92,8 +94,10 @@ System.out.println("depois de pegar feitico");
             }
             ArrayList<Feitico> feiticos = this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
             ArrayList<ConteudoTelaBatalha> conteudoTelaS = this.compactar(feiticos);
+            telaBatalha.mostraFeiticos(conteudoTelaS);
         }catch(Exception e){
             e.getMessage();
+            telaBatalha.mostraMenuBatalha();
         }
     }
 

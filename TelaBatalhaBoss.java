@@ -59,8 +59,6 @@ public class TelaBatalhaBoss {
         for(int i = 0; i < conteudoTelaS.size(); i++){
             System.out.println("Índice:        " + i);
             System.out.println("Nome:          " + conteudoTelaS.get(i).consumivel.getNome());
-            System.out.println("Ação:          " + conteudoTelaS.get(i).consumivel.getAcao());
-            System.out.println("Valor da ação: +" + conteudoTelaS.get(i).consumivel.getValorAcao());
         }
         System.out.println("Sua arma é: ");
         System.out.println("Nome: " + conteudoTela.arma.getNome());

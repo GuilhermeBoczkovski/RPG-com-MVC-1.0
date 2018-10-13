@@ -36,7 +36,7 @@ public class Jogador extends Ser implements IJogador {
         super.setVidaTotal(10+(10*nivel));
         this.possuiChave = false;
         this.esquiva = 1.5 + 0.1*nivel;
-        this.grimorios = 0;
+        this.grimorios = 5;
         this.diario = new Diario();
         this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
     }
@@ -93,7 +93,7 @@ public class Jogador extends Ser implements IJogador {
     
     public void usarItem(int indice) {
         Consumivel item = this.bolsa.getConsumivel(indice);
-        int vidaExtra = item.restauraVida();
+        int vidaExtra = item.restauraVida(this.getVidaTotal());
         this.bolsa.dellConsumivel(indice);
         
         this.setVidaAtual(this.getVidaAtual() + vidaExtra);

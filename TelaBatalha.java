@@ -65,8 +65,6 @@ public class TelaBatalha extends TelaEncontro{
             for(int i = 0; i < conteudoTelaS.size(); i++){
                 System.out.println("Índice:        " + i);
                 System.out.println("Nome:          " + conteudoTelaS.get(i).consumivel.getNome());
-                System.out.println("Ação:          " + conteudoTelaS.get(i).consumivel.getAcao());
-                System.out.println("Valor da ação: +" + conteudoTelaS.get(i).consumivel.getValorAcao());
             }
         }else{
             System.out.println("Você não possui consumiveis");
@@ -81,7 +79,7 @@ public class TelaBatalha extends TelaEncontro{
         System.out.println("=============================");
         System.out.println("Os Feitiços são:");
         for(int i = 0; i < conteudoTelaS.size(); i++){
-            System.out.println("Índice:   " + conteudoTelaS.get(i).feitico.getIndice());
+            //System.out.println("Índice:   " + conteudoTelaS.get(i).feitico.getIndice());!!!!
             System.out.println("Nome:     " + conteudoTelaS.get(i).feitico.getNome());
             System.out.println("Dano:     " + conteudoTelaS.get(i).feitico.getDano());
             System.out.println("Elemento: " + conteudoTelaS.get(i).feitico.getTipoElemento());

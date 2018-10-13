@@ -21,7 +21,7 @@ public class TelaBau {
         this.temConsumivel = itens.temConsumivel;
         System.out.println("  ");
         System.out.println("Voce encontrou um bau!");
-        System.out.println("Voce o abre e eh isso que voce encontra:");
+        System.out.println("Voce o abre e eh isso que voce encontra: ");
         System.out.println("");
         if(this.temArma){
             System.out.println("uma arma.");
@@ -37,58 +37,65 @@ public class TelaBau {
     }
     
     public void mostraMenu() {
+        System.out.println("");
         System.out.println("=====================");
         System.out.println("Oque voce deseja fazer?");
-        int contador = 2;
         System.out.println("0- sair da sala");
         System.out.println("1- Ver itens da bolsa");
-        if(temArma){
-            System.out.println("2- trocar a sua arma atual com a do bau.");
+        System.out.println("2- Ver arma");
+        if(this.temArma){
+            System.out.println("3- trocar a sua arma atual com a do bau.");
         }
-        if(temConsumivel){
-            System.out.println("3- pegar consumivel");
+        if(this.temConsumivel){
+            System.out.println("4- pegar consumivel");
         }
         
-        int escolha = input.nextInt();
-        input.nextLine();
+        String escolha = input.nextLine();
         ctrlBau.executaOpcao(escolha);
     }
 
     public void mostraFimBau() {
         String mensagem = "";
         if(temGrimorio){
-            mensagem = "pega o grimorio e ";
+            mensagem = "pega o grimorio ";
         }
         System.out.println("Voce " + mensagem + "sai da sala e continua a jornada...");
         System.out.println("========================================");
         ctrlBau.finalizaBau();
     }
     
-    public void mostraColetaConsumivel(ArrayList<ConteudoTelaBau> itensJogador, ConteudoTelaBau consumivelBau, ConteudoTelaBau itens){
-        System.out.println("===========BOLSA==========");
-        int contador = 0;
-        for(ConteudoTelaBau item: itensJogador){
-            String nome = item.item.getNome();
-            System.out.println(contador + "-" + nome);
+    public void mostraColetaConsumivel(ArrayList<ConteudoTelaBau> itensJogador, ConteudoTelaBau consumivelBau){
+        if(itensJogador.isEmpty()){
+            System.out.println("===========BOLSA==========");
+            System.out.println("");
+            System.out.println("Sua bolsa está vazia...");
+            System.out.println("");
+        }else{
+            System.out.println("===========BOLSA==========");
+            int contador = 0;
+            for(ConteudoTelaBau item: itensJogador){
+                String nome = item.item.getNome();
+                System.out.println(contador + "-" + nome);
+            }
         }
         System.out.println("========CONSUMIVEL========");
-        System.out.println(consumivelBau.item.getNome());
-        System.out.println("                          ");
-        System.out.println("Deseja Pegar o consumivel?");
-        System.out.println("1- SIM");
-        System.out.println("2- NAO");
-        int escolha = input.nextInt();
-        input.nextLine();
-        
-        switch(escolha){
-            case 1: ctrlBau.pegarConsumivel();
-                    System.out.println("Voce Pegou o consumivel..");
-                    mostraMenu();
-                    break;
-            case 2: mostraMenu();
-                    break;
-        }
-        
+            System.out.println(consumivelBau.item.getNome());
+            System.out.println("                          ");
+            System.out.println("Deseja Pegar o consumivel?");
+            System.out.println("1- SIM");
+            System.out.println("2- NAO");
+            String escolha = input.nextLine();
+
+            switch(escolha){
+                case "1": ctrlBau.pegarConsumivel();
+                        System.out.println("Voce Pegou o consumivel..");
+                        mostraMenu();
+                        break;
+                case "2": mostraMenu();
+                        break;
+                default: System.out.println("numero inválido, tente denovo");
+                        mostraColetaConsumivel(itensJogador, consumivelBau);
+            }
     }
     
     public void mostraComparacao(ConteudoTelaBau conteudo){
@@ -99,27 +106,48 @@ public class TelaBau {
         System.out.println("deseja trocar sua arma?");
         System.out.println("1- SIM");
         System.out.println("2- NAO");
-        int escolha = input.nextInt();
-        input.nextLine();
+        String escolha = input.nextLine();
         switch(escolha){
-            case 1: ctrlBau.trocarArma();
+            case "1": ctrlBau.trocarArma();
                     System.out.println("trocou de arma!");
                     mostraMenu();
                     break;
-            case 2: mostraMenu();
+            case "2": mostraMenu();
                     break;
+            default: System.out.println("numero invalido, tente denovo");
+                    mostraComparacao(conteudo);
         }
     }
     
 
     public void mostraItens(ArrayList<ConteudoTelaBau> itens) {
-        System.out.println("==========BOLSA=========");
-        int contador = 0;
-        for(ConteudoTelaBau item: itens){
-            String nome = item.item.getNome();
-            System.out.println(contador + "-" + nome);
+        if(itens.isEmpty()){
+        System.out.println("=========BOLSA========");
+        System.out.println("");
+        System.out.println("Sua bolsa está vazia...");
+        mostraMenu();
+        } else {
+            System.out.println("=========BOLSA========");
+            int contador = 0;
+            for(ConteudoTelaBau item: itens){
+                String nome = item.item.getNome();
+                System.out.println(contador + "-" + nome);
+            }
+            mostraMenu();
         }
-        System.out.println("========================");
+
+    }
+
+    void update(ConteudoTelaBau conteudo) {
+        this.temArma = conteudo.temArma;
+        this.temConsumivel = conteudo.temConsumivel;
+        this.temGrimorio = conteudo.temGrimorio;
+    }
+
+    void mostraArma(ConteudoTelaBau conteudo) {
+        System.out.println("=========ARMA========");
+        System.out.println("");
+        System.out.println(conteudo.armaJogador.getNome() + ", dano:" +conteudo.armaJogador.getDano());
         mostraMenu();
     }
     

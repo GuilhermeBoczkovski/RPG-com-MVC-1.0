@@ -27,6 +27,10 @@ public class Feitico {
     public TipoElemento getTipoElemento(){
         return tipoElemento;
     }
+
+    public String getIndice() {
+        return "indice do feitico!";
+    }
     
     
 }

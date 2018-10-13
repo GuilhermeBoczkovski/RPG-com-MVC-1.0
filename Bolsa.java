@@ -7,7 +7,7 @@ public class Bolsa {
     private ArrayList<Consumivel> consumiveis;
     
     public Bolsa(){
-        consumiveis = new ArrayList<>();
+        consumiveis = new ArrayList();
     }
     
     public void addConsumivel(Consumivel consumivel){
@@ -26,5 +26,9 @@ public class Bolsa {
      */
     public ArrayList<Consumivel> verConsumiveis(){
         return this.consumiveis;
+    }
+
+    public Consumivel getConsumivel(int indice) {
+        return consumiveis.get(indice);
     }
 }

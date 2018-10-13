@@ -5,7 +5,8 @@ public class Arma extends Item{
     
     public Arma(int nivel){
         super("Cajado magico de nivel " + nivel);
-        this.dano = 5;
+        double dano = 3 + (1.5 * nivel);
+        this.dano = (int) dano;
     }
 
     public int getDano() {
