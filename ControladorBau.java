@@ -93,6 +93,7 @@ class ControladorBau extends TelaEncontro{
     }
     
     public void finalizaBau(){
+        this.ctrlPrincipal.getJogador().getDiario().addEvento(TipoEvento.BAU);
         ctrlPrincipal.escolheEncontro();
     }
     

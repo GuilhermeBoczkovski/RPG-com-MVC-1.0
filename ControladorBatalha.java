@@ -51,6 +51,7 @@ class ControladorBatalha {
     
     public void finalizaBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador){
         this.telaBatalha.mostraFimBatalha(conteudoTelaAtaqueJogador);
+        this.controladorPrincipal.getJogador().ganhaExperiencia();
         this.controladorPrincipal.getJogador().getDiario().addEvento(TipoEvento.BATALHA);
         this.controladorPrincipal.escolheEncontro();
         
@@ -100,29 +101,36 @@ class ControladorBatalha {
         }
     }
 
-    public void executaOpcao(int opcao1){
-        switch(opcao1){
-            case 1 :
-                this.telaBatalha.mostraMenuAtaque(compactar(this.controladorPrincipal.getJogador().getFeiticos()));
-                break;
-            case 2 :
-                this.analisarMonstro();
-                break;
-            case 3 :
-                this.telaBatalha.mostraMenuFeitico();
-                break;
-            case 4 :
-                this.verItens();
-                break;
-            case 5 :
-                this.telaBatalha.mostraMenuItens(compactar(this.controladorPrincipal.getJogador().getBolsa().verConsumiveis(),1));
-                break;
-            case 6 :
-                this.verMeusAtributos();
-                break;
+    public void executaOpcao(String opcao){
+        try{
+            switch(opcao){
+                case "1" :
+                    this.telaBatalha.mostraMenuAtaque(compactar(this.controladorPrincipal.getJogador().getFeiticos()));
+                    break;
+                case "2" :
+                    this.analisarMonstro();
+                    break;
+                case "3" :
+                    this.telaBatalha.mostraMenuFeitico();
+                    break;
+                case "" :
+                    this.verItens();
+                    break;
+                case "5" :
+                    this.telaBatalha.mostraMenuItens(compactar(this.controladorPrincipal.getJogador().getBolsa().verConsumiveis(),1));
+                    break;
+                case "6" :
+                    this.verMeusAtributos();
+                    break;
+                default:
+                    throw new NumeroInvalidoException();
+            }
+        }catch(NumeroInvalidoException e){
+            System.out.println(e.getMessage());
+            this.telaBatalha.mostraMenuBatalha();
         }
     }
-    
+
     public void iniciaEncontro(){
         this.geraMonstro();
         this.telaBatalha.mostraInicioBatalha();

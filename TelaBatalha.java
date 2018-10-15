@@ -23,8 +23,7 @@ public class TelaBatalha extends TelaEncontro{
         System.out.println("5- Usar Item");
         System.out.println("6- Meus Atributos");
         String opcaoString = teclado.nextLine();
-        int opcaoInt = Integer.parseInt(opcaoString);
-        this.controladorBatalha.executaOpcao(opcaoInt);
+        this.controladorBatalha.executaOpcao(opcaoString);
     }
     
     public void mostraAtaque(ConteudoTelaBatalha conteudoTelaAtaqueJogador, ConteudoTelaBatalha conteudoTelaAtaqueMonstro){
@@ -162,12 +161,19 @@ public class TelaBatalha extends TelaEncontro{
         this.mostraMenuBatalha();
     }
 
-    void mostraInicioBatalha() {
+    public void mostraInicioBatalha() {
         System.out.println("");
         System.out.println("Você entra numa sala escura...");
         System.out.println("Começa a entrar mais afundo na sala quando de repente");
         System.out.println("um monstro do tamanho de dois homens aparece na sua frente!!");
         System.out.println("Imediatamente você pega seu cajado e se prepara para a batalha");
+        this.mostraMenuBatalha();
+    }
+
+    public void mostraOpcaoInvalida() {
+        System.out.println("");
+        System.out.println("Opcao invalida, tente novamente");
+        System.out.println("");
         this.mostraMenuBatalha();
     }
 }

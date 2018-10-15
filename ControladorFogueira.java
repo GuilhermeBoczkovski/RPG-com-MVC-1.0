@@ -59,22 +59,27 @@ public class ControladorFogueira {
     }
     
     public void criarFeitico(String nome, int tipo){
-        Feitico feitico;
-        switch(tipo){
-            case 1: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.FOGO);
-                    ctrlEncontro.getJogador().addFeitico(feitico);
-                    break;
-            case 2: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.AGUA);
-                    ctrlEncontro.getJogador().addFeitico(feitico);
-                    break;
-            case 3: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.GRAMA);
-                    ctrlEncontro.getJogador().addFeitico(feitico);
-                    break;
-            case 4: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.PEDRA);
-                    ctrlEncontro.getJogador().addFeitico(feitico);
-                    break;
+        if(this.ctrlEncontro.getJogador().getGrimorios()>=1){
+            Feitico feitico;
+            switch(tipo){
+                case 1: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.FOGO);
+                        ctrlEncontro.getJogador().addFeitico(feitico);
+                        break;
+                case 2: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.AGUA);
+                        ctrlEncontro.getJogador().addFeitico(feitico);
+                        break;
+                case 3: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.GRAMA);
+                        ctrlEncontro.getJogador().addFeitico(feitico);
+                        break;
+                case 4: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.PEDRA);
+                        ctrlEncontro.getJogador().addFeitico(feitico);
+                        break;
+            }
+                this.ctrlEncontro.getJogador().setGrimorios(this.ctrlEncontro.getJogador().getGrimorios()-1);
+                telaFogueira.mostraCriarFeitico();
+        }else{
+            this.telaFogueira.mostraErroCriarFeitico();
         }
-        telaFogueira.mostraCriarFeitico();
     }
     
     public void verFeiticos(String tipo){

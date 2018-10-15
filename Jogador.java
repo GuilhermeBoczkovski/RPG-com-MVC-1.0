@@ -33,7 +33,7 @@ public class Jogador extends Ser implements IJogador {
         super.setVidaTotal(10+(10*nivel));
         this.possuiChave = false;
         this.esquiva = 1.5 + 0.1*nivel;
-        this.grimorios = 5;
+        this.grimorios = 15;
         this.diario = new Diario();
         this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
     }

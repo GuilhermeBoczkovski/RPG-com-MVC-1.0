@@ -103,10 +103,10 @@ public class TelaFogueira extends TelaEncontro{
     }
     
     public void mostraMenuEsquecerFeiticos(ArrayList<ConteudoTelaFogueira> feiticos){
-        if(feiticos.isEmpty()){
+        if(feiticos.size()<=1){
             System.out.println("=========================");
             System.out.println("");
-            System.out.println("Voce nao tem feiticos para esquecer...");
+            System.out.println("Voce nao pode esquecer seu unico feitico...");
             System.out.println("");
             mostraMenuFogueira();
         } else {
