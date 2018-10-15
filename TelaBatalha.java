@@ -99,10 +99,9 @@ public class TelaBatalha extends TelaEncontro{
         System.out.println("2 - AGUA");
         System.out.println("3 - GRAMA");
         System.out.println("4 - PEDRA");
-        int opcao = teclado.nextInt();
-        teclado.nextLine();
+        String opcao = teclado.nextLine();
         ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
-        conteudoTela.tipoInt = opcao;
+        conteudoTela.tipoString = opcao;
         this.controladorBatalha.verFeiticos(conteudoTela);
     }
 
@@ -175,5 +174,9 @@ public class TelaBatalha extends TelaEncontro{
         System.out.println("Opcao invalida, tente novamente");
         System.out.println("");
         this.mostraMenuBatalha();
+    }
+
+    public void mostraExcecao(String message) {
+        System.out.println(message);
     }
 }

@@ -76,17 +76,17 @@ class ControladorBatalha {
     public void verFeiticos(ConteudoTelaBatalha conteudoTela){
         try{
             TipoElemento tipoElemento;
-            switch(conteudoTela.tipoInt){
-                case 1 :
+            switch(conteudoTela.tipoString){
+                case "1" :
                     tipoElemento = TipoElemento.FOGO;
                     break;
-                case 2 :
+                case "2" :
                     tipoElemento = TipoElemento.AGUA;
                     break;
-                case 3 :
+                case "3" :
                     tipoElemento = TipoElemento.GRAMA;
                     break;
-                case 4 :
+                case "4" :
                     tipoElemento = TipoElemento.PEDRA;
                     break;
                 default :
@@ -95,8 +95,8 @@ class ControladorBatalha {
             ArrayList<Feitico> feiticos = this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
             ArrayList<ConteudoTelaBatalha> conteudoTelaS = this.compactar(feiticos);
             telaBatalha.mostraFeiticos(conteudoTelaS);
-        }catch(Exception e){
-            e.getMessage();
+        }catch(NumeroInvalidoException e){
+            this.telaBatalha.mostraExcecao(e.getMessage());
             telaBatalha.mostraMenuBatalha();
         }
     }
@@ -113,7 +113,7 @@ class ControladorBatalha {
                 case "3" :
                     this.telaBatalha.mostraMenuFeitico();
                     break;
-                case "" :
+                case "4" :
                     this.verItens();
                     break;
                 case "5" :
@@ -126,7 +126,7 @@ class ControladorBatalha {
                     throw new NumeroInvalidoException();
             }
         }catch(NumeroInvalidoException e){
-            System.out.println(e.getMessage());
+            this.telaBatalha.mostraExcecao(e.getMessage());
             this.telaBatalha.mostraMenuBatalha();
         }
     }
@@ -162,8 +162,17 @@ class ControladorBatalha {
     }
     
     public void usarItem(int indice){
-        this.controladorPrincipal.getJogador().usarItem(indice);
-        this.telaBatalha.mostraMenuBatalha();
+        try{
+            if(indice < this.controladorPrincipal.getJogador().getBolsa().verConsumiveis().size()){
+                this.controladorPrincipal.getJogador().usarItem(indice);
+                this.telaBatalha.mostraMenuBatalha();
+            }else{
+                throw new NumeroInvalidoException();
+            }
+        }catch(NumeroInvalidoException e){
+            this.telaBatalha.mostraExcecao(e.getMessage());
+            this.telaBatalha.mostraMenuBatalha();
+        }
     }
     
     public void verMeusAtributos(){
