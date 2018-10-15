@@ -61,20 +61,20 @@ public class ControladorFogueira {
         telaFogueira.mostraMenuFogueira();
     }
     
-    public void criarFeitico(String nome, int tipo){
+    public void criarFeitico(String nome, String tipo){
         if(this.ctrlEncontro.getJogador().getGrimorios()>=1){
             Feitico feitico;
             switch(tipo){
-                case 1: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.FOGO);
+                case "1": feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.FOGO);
                         ctrlEncontro.getJogador().addFeitico(feitico);
                         break;
-                case 2: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.AGUA);
+                case "2": feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.AGUA);
                         ctrlEncontro.getJogador().addFeitico(feitico);
                         break;
-                case 3: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.GRAMA);
+                case "3": feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.GRAMA);
                         ctrlEncontro.getJogador().addFeitico(feitico);
                         break;
-                case 4: feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.PEDRA);
+                case "4": feitico = new Feitico(ctrlEncontro.getJogador().getNivelInt(), nome, TipoElemento.PEDRA);
                         ctrlEncontro.getJogador().addFeitico(feitico);
                         break;
             }

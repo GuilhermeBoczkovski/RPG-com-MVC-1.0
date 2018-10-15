@@ -28,7 +28,6 @@ public class TelaFogueira extends TelaEncontro{
     }
     
     public void mostraInicioFogueira(){
-
         System.out.println("Voce encontrou uma fogueira...");
         System.out.println("voce se sente regenerado...");
         System.out.println("Jogador: " + ctrlFogueira.compactaJogador().jogador.getNome() + " || Nivel: " + ctrlFogueira.compactaJogador().jogador.getNivelInt());
@@ -214,9 +213,8 @@ public class TelaFogueira extends TelaEncontro{
             System.out.println("2 - AGUA");
             System.out.println("3 - GRAMA");
             System.out.println("4 - PEDRA");
-            int tipo = input.nextInt();
-            input.nextLine();
-            if(tipo <= 4 && tipo >= 1){
+            String tipo = input.nextLine();
+            if(tipo.equals("1") || tipo.equals("2") || tipo.equals("3") || tipo.equals("4")){
                 ctrlFogueira.criarFeitico(nome, tipo);
             } else {
                 System.out.println("Numero invalido, tente denovo...");

@@ -27,7 +27,7 @@ public class ControladorPrincipal {
     public void escolheEncontro(){
         Random rand = new Random();
         int escolha = rand.nextInt(3);
-        switch(0){
+        switch(1){
             case 0:
                     ctrlBatalha.iniciaEncontro();
                     break;
