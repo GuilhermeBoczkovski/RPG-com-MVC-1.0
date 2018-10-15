@@ -2,6 +2,6 @@ package rpgcommvc;
 
 public enum TipoEvento {
     FOGUEIRA,
-    BSATALHA,
+    BATALHA,
     BAU;
 }

@@ -22,8 +22,9 @@ public class TelaBatalha extends TelaEncontro{
         System.out.println("4- Ver Itens");
         System.out.println("5- Usar Item");
         System.out.println("6- Meus Atributos");
-        int opcao = teclado.nextInt();
-        this.controladorBatalha.executaOpcao(opcao);
+        String opcaoString = teclado.nextLine();
+        int opcaoInt = Integer.parseInt(opcaoString);
+        this.controladorBatalha.executaOpcao(opcaoInt);
     }
     
     public void mostraAtaque(ConteudoTelaBatalha conteudoTelaAtaqueJogador, ConteudoTelaBatalha conteudoTelaAtaqueMonstro){
@@ -77,14 +78,19 @@ public class TelaBatalha extends TelaEncontro{
 
     public void mostraFeiticos(ArrayList<ConteudoTelaBatalha> conteudoTelaS){
         System.out.println("=============================");
-        System.out.println("Os Feitiços são:");
-        for(int i = 0; i < conteudoTelaS.size(); i++){
-            //System.out.println("Índice:   " + conteudoTelaS.get(i).feitico.getIndice());!!!!
-            System.out.println("Nome:     " + conteudoTelaS.get(i).feitico.getNome());
-            System.out.println("Dano:     " + conteudoTelaS.get(i).feitico.getDano());
-            System.out.println("Elemento: " + conteudoTelaS.get(i).feitico.getTipoElemento());
+        if(conteudoTelaS.isEmpty()){
+            System.out.println("Voce nao possui feiticos desse tipo");
+            this.mostraMenuBatalha();
+        }else{
+            System.out.println("Os Feitiços são:");
+            for(int i = 0; i < conteudoTelaS.size(); i++){
+                //System.out.println("Índice:   " + conteudoTelaS.get(i).feitico.getIndice());!!!!
+                System.out.println("Nome:     " + conteudoTelaS.get(i).feitico.getNome());
+                System.out.println("Dano:     " + conteudoTelaS.get(i).feitico.getDano());
+                System.out.println("Elemento: " + conteudoTelaS.get(i).feitico.getTipoElemento());
+            }
+            this.mostraMenuBatalha();
         }
-        this.mostraMenuBatalha();
     }
 
     public void mostraMenuFeitico(){
@@ -101,24 +107,51 @@ public class TelaBatalha extends TelaEncontro{
         this.controladorBatalha.verFeiticos(conteudoTela);
     }
 
-    public void mostraMenuAtaque(){
+    public void mostraMenuAtaque(ArrayList<ConteudoTelaBatalha> conteudoTelaS){
         System.out.println("=============================");
+        System.out.println("Seus feiticos sao:");
+        int i = 0;
+        for(ConteudoTelaBatalha conteudoTela: conteudoTelaS){
+            System.out.println("indice " + i + ": " + conteudoTela.feitico.getNome() + ", tipo:  " + conteudoTela.feitico.getTipoElemento() + ", dano:  +" + conteudoTela.feitico.getDano());
+            i++;
+        }
+        System.out.println("");
         System.out.println("Qual feitiço gostaria de usar?");
         System.out.println("(digite o indice do feitiço)");
-        int indiceFeitico = teclado.nextInt();
-        ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
-        conteudoTela.indiceFeitico = indiceFeitico;
-        this.controladorBatalha.atacar(conteudoTela);
+        String indiceFeiticoString = teclado.nextLine();
+        int indiceFeiticoInt = Integer.parseInt(indiceFeiticoString);
+        
+        if(indiceFeiticoInt >= 0 && indiceFeiticoInt < conteudoTelaS.size()){
+            ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
+            conteudoTela.indiceFeitico = indiceFeiticoInt;
+            this.controladorBatalha.atacar(conteudoTela);
+        } else {
+            System.out.println("Escolha invalida, tente novamente:");
+            System.out.println("");
+            this.mostraMenuAtaque(conteudoTelaS);
+        }
     }
     
-    public void mostraMenuItens(){
+    public void mostraMenuItens(ArrayList<ConteudoTelaBatalha> conteudoTelaS){
         System.out.println("=============================");
-        System.out.println("Qual item gostaria de usar?");
-        System.out.println("(digite o indice do item)");
-        int indiceItem = teclado.nextInt();
-        ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
-        conteudoTela.indiceItem = indiceItem;
-        this.controladorBatalha.usarItem(indiceItem);
+        if(conteudoTelaS.isEmpty()){
+            System.out.println("Você não possui itens");
+            this.mostraMenuBatalha();
+        } else {
+            System.out.println("Seus itens são: ");
+            int contador = 0;
+            for(ConteudoTelaBatalha conteudoTela: conteudoTelaS){
+                System.out.println(contador + "- " + conteudoTela.consumivel.getNome());
+                contador++;
+            }
+            System.out.println("Qual item gostaria de usar?");
+            System.out.println("(digite o indice do item)");
+            String indiceItemString = teclado.nextLine();
+            int indiceItemInt = Integer.parseInt(indiceItemString);
+            ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
+            conteudoTela.indiceItem = indiceItemInt;
+            this.controladorBatalha.usarItem(indiceItemInt);
+        }
     }
     
     public void mostraMeusAtributos(Jogador jogador){

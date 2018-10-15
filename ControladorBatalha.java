@@ -11,24 +11,22 @@ class ControladorBatalha {
     public ControladorBatalha(ControladorPrincipal controladorPrincipal){
         this.telaBatalha = new TelaBatalha(this);
         this.controladorPrincipal = controladorPrincipal;
-        TipoElemento tipoElemento = TipoElemento.AGUA;
-        /*CORRIGIR PROBABILIDADE DO TIPO ELEMENTO*/
-        this.monstro = new Monstro(this.controladorPrincipal.getJogador().getNivelInt(), tipoElemento);
-        
     }
     
     public void atacar(ConteudoTelaBatalha conteudoTela){
-System.out.println("antes de pegar feitico");
+
         ConteudoTelaBatalha conteudoTelaAtaqueJogador = new ConteudoTelaBatalha();
         Feitico feitico = this.controladorPrincipal.getJogador().getFeitico(conteudoTelaAtaqueJogador.indiceFeitico);
-System.out.println("depois de pegar feitico");
+
         conteudoTelaAtaqueJogador.feitico = feitico;
         int danoDoJogador = feitico.getDano();
         danoDoJogador += this.controladorPrincipal.getJogador().getArma().getDano();
         TipoElemento elementoFeitico = feitico.getTipoElemento();
         TipoElemento elementoMonstro = this.monstro.getTipoElemento();
         if(!(elementoMonstro.equals(elementoFeitico))){
-            if((elementoMonstro.equals(TipoElemento.FOGO) && elementoFeitico.equals(TipoElemento.AGUA)) || (elementoMonstro.equals(TipoElemento.AGUA) && elementoFeitico.equals(TipoElemento.GRAMA)) || (elementoMonstro.equals(TipoElemento.GRAMA) && elementoFeitico.equals(TipoElemento.FOGO))){
+            if(elementoMonstro.equals(TipoElemento.PEDRA)){
+                
+            }else if((elementoMonstro.equals(TipoElemento.FOGO) && elementoFeitico.equals(TipoElemento.AGUA)) || (elementoMonstro.equals(TipoElemento.AGUA) && elementoFeitico.equals(TipoElemento.GRAMA)) || (elementoMonstro.equals(TipoElemento.GRAMA) && elementoFeitico.equals(TipoElemento.FOGO))){
                 danoDoJogador = (int)(danoDoJogador*1.15);
             }else{
                 danoDoJogador = (int)(danoDoJogador*0.85);
@@ -53,6 +51,7 @@ System.out.println("depois de pegar feitico");
     
     public void finalizaBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador){
         this.telaBatalha.mostraFimBatalha(conteudoTelaAtaqueJogador);
+        this.controladorPrincipal.getJogador().getDiario().addEvento(TipoEvento.BATALHA);
         this.controladorPrincipal.escolheEncontro();
         
     }
@@ -104,7 +103,7 @@ System.out.println("depois de pegar feitico");
     public void executaOpcao(int opcao1){
         switch(opcao1){
             case 1 :
-                this.telaBatalha.mostraMenuAtaque();
+                this.telaBatalha.mostraMenuAtaque(compactar(this.controladorPrincipal.getJogador().getFeiticos()));
                 break;
             case 2 :
                 this.analisarMonstro();
@@ -116,7 +115,7 @@ System.out.println("depois de pegar feitico");
                 this.verItens();
                 break;
             case 5 :
-                this.telaBatalha.mostraMenuItens();
+                this.telaBatalha.mostraMenuItens(compactar(this.controladorPrincipal.getJogador().getBolsa().verConsumiveis(),1));
                 break;
             case 6 :
                 this.verMeusAtributos();
@@ -125,6 +124,7 @@ System.out.println("depois de pegar feitico");
     }
     
     public void iniciaEncontro(){
+        this.geraMonstro();
         this.telaBatalha.mostraInicioBatalha();
     }
 
@@ -177,6 +177,37 @@ System.out.println("depois de pegar feitico");
             conteudoTelaS.add(conteudoTela);
         }
         return conteudoTelaS;
+    }
+    
+    private ArrayList<ConteudoTelaBatalha> compactar(ArrayList<Consumivel> consumiveis, int i) {
+        ArrayList<ConteudoTelaBatalha> conteudoTelaS = new ArrayList();
+        for(Consumivel consumivel : consumiveis){
+            ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
+            conteudoTela.consumivel = consumivel;
+            conteudoTelaS.add(conteudoTela);
+        }
+        return conteudoTelaS;
+    }
+
+    private void geraMonstro() {
+        int aleatorio = (int)(Math.random() * ((4 - 1) + 1)) + 1;
+        TipoElemento tipoElemento;
+        switch(aleatorio){
+            case 1:
+                tipoElemento = TipoElemento.AGUA;
+                break;
+            case 2: 
+                tipoElemento = TipoElemento.FOGO;
+                break;
+            case 3: 
+                tipoElemento = TipoElemento.GRAMA;
+                break;
+            default:
+                tipoElemento = TipoElemento.PEDRA;
+                break;
+        }
+        /*CORRIGIR PROBABILIDADE DO TIPO ELEMENTO*/
+        this.monstro = new Monstro(this.controladorPrincipal.getJogador().getNivelInt(), tipoElemento);
     }
     
 }

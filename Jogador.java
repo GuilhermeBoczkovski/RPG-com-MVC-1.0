@@ -23,9 +23,6 @@ public class Jogador extends Ser implements IJogador {
         this.grimorios = 0;
         this.diario = new Diario();
         this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.PEDRA));
-        this.feiticos.add(new Feitico(this.getNivelInt(), "AGUA Sinistros", TipoElemento.AGUA));
-        this.feiticos.add(new Feitico(this.getNivelInt(), "GRAMA Sinistros", TipoElemento.GRAMA));
-        this.feiticos.add(new Feitico(this.getNivelInt(), "Pedregulhos Sinistros", TipoElemento.FOGO));
         this.arma = new Arma(this.getNivelInt());
     }
 
