@@ -32,7 +32,6 @@ public class TelaBau {
         if(this.temGrimorio){
             System.out.println("um grimorio.");
         }
-        mostraMenu();
         
     }
     
@@ -149,6 +148,10 @@ public class TelaBau {
         System.out.println("");
         System.out.println(conteudo.armaJogador.getNome() + ", dano:" +conteudo.armaJogador.getDano());
         mostraMenu();
+    }
+
+    void mostraException(String message) {
+        System.out.println(message);
     }
     
 }

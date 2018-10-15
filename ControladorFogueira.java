@@ -40,7 +40,7 @@ public class ControladorFogueira {
                 default: throw new NumeroInvalidoException();
             }
         } catch(Exception e){
-            System.out.println(e.getMessage());
+            telaFogueira.mostraException(e.getMessage());
             telaFogueira.mostraMenuFogueira();
         }
     }
@@ -48,14 +48,17 @@ public class ControladorFogueira {
     public void iniciaEncontro(){
         ctrlEncontro.getJogador().setVidaAtual(ctrlEncontro.getJogador().getVidaTotal());
         telaFogueira.mostraInicioFogueira();
+        telaFogueira.mostraMenuFogueira();
     }
     
     public void verDiario(){
         telaFogueira.mostraDiario(compactarEvento());
+        telaFogueira.mostraMenuFogueira();
     }
     
     public void verItens(){
         telaFogueira.mostraItens(compactarItem());
+        telaFogueira.mostraMenuFogueira();
     }
     
     public void criarFeitico(String nome, int tipo){
@@ -86,17 +89,21 @@ public class ControladorFogueira {
         try{
             switch(tipo){
                 case "1": telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.FOGO));
+                        telaFogueira.mostraMenuFogueira();
                         break;
                 case "2": telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.AGUA));
+                        telaFogueira.mostraMenuFogueira();
                         break;
                 case "3": telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.GRAMA));
+                        telaFogueira.mostraMenuFogueira();
                         break;
                 case "4": telaFogueira.mostraFeiticos(compactarFeiticoPorTipo(TipoElemento.PEDRA));
+                        telaFogueira.mostraMenuFogueira();
                         break;
                 default: throw new NumeroInvalidoException();
             }
         } catch(Exception e){
-            System.out.println(e.getMessage());
+            telaFogueira.mostraException(e.getMessage());
             telaFogueira.mostraMenuVerFeiticos();
         }
     }

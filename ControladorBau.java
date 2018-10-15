@@ -22,6 +22,7 @@ class ControladorBau extends TelaEncontro{
     public void iniciaEncontro() {
         geraItens();
         telaBau.mostraAcharBau();
+        telaBau.mostraMenu();
     }
     
     public void geraItens(){
@@ -86,7 +87,7 @@ class ControladorBau extends TelaEncontro{
                 default: throw new NumeroInvalidoException();
             }
         }catch(NumeroInvalidoException e){
-            System.out.println(e.getMessage());
+            telaBau.mostraException(e.getMessage());
             telaBau.mostraMenu();
         }
 

@@ -28,13 +28,24 @@ public class TelaFogueira extends TelaEncontro{
     }
     
     public void mostraInicioFogueira(){
-        ctrlFogueira.compactaJogador().jogador.setGrimorios(2);
+
         System.out.println("Voce encontrou uma fogueira...");
         System.out.println("voce se sente regenerado...");
         System.out.println("Jogador: " + ctrlFogueira.compactaJogador().jogador.getNome() + " || Nivel: " + ctrlFogueira.compactaJogador().jogador.getNivelInt());
         System.out.println("dano da arma: " + ctrlFogueira.compactaJogador().jogador.getArma().getDano());
         System.out.println("vida: " + ctrlFogueira.compactaJogador().jogador.getVidaTotal());
-        mostraMenuFogueira();
+        int grimorios = ctrlFogueira.compactaJogador().jogador.getGrimorios();
+        switch (grimorios) {
+            case 0:
+                System.out.println("Voce nao possui grimorios no momento.");
+                break;
+            case 1:
+                System.out.println("Voce possui 1 grimorio.");
+                break;
+            default:
+                System.out.println("Voce possui " + grimorios + " grimorios.");
+                break;
+        }
     }
     
     public void mostraDiario(ArrayList<ConteudoTelaFogueira> eventos){
@@ -43,7 +54,6 @@ public class TelaFogueira extends TelaEncontro{
             System.out.println("");
             System.out.println("Seu diario esta em branco...");
             System.out.println("");
-            mostraMenuFogueira();
         } else {
             System.out.println("=========================");
             int contador = 0;
@@ -52,7 +62,6 @@ public class TelaFogueira extends TelaEncontro{
                 contador++;
             }
             System.out.println("");
-            mostraMenuFogueira();
         }
     }
     
@@ -62,7 +71,6 @@ public class TelaFogueira extends TelaEncontro{
             System.out.println("");
             System.out.println("Sua bolsa esta vazia...");
             System.out.println("");
-            mostraMenuFogueira();
         } else {
             System.out.println("=========================");
             int contador = 0;
@@ -70,7 +78,6 @@ public class TelaFogueira extends TelaEncontro{
                 System.out.println(contador + "- " + conteudo.item.getNome());
                 contador++;
             }
-            mostraMenuFogueira();
         }
     }
     
@@ -90,7 +97,6 @@ public class TelaFogueira extends TelaEncontro{
             System.out.println("");
             System.out.println("Voce nao possui feiticos desse tipo...");
             System.out.println("");
-            mostraMenuFogueira();
         } else {
             System.out.println("=========================");
             int contador = 0;
@@ -98,7 +104,6 @@ public class TelaFogueira extends TelaEncontro{
                 System.out.println(contador + "- " + conteudo.feitico.getNome() + ", tipo:  " + conteudo.feitico.getTipoElemento() + ", dano: " + conteudo.feitico.getDano());
                 contador++;
             }
-            mostraMenuFogueira();
         }
     }
     
@@ -236,5 +241,9 @@ public class TelaFogueira extends TelaEncontro{
         System.out.println("Feitico criado com sucesso!");
         System.out.println("                           ");
         mostraMenuFogueira();
+    }
+
+    void mostraException(String message) {
+        System.out.println(message);
     }
 }
