@@ -2,7 +2,7 @@ package rpgcommvc;
 import java.util.ArrayList;
 import java.util.Random;
 
-class ControladorBau extends TelaEncontro{
+class ControladorBau{
     private ControladorPrincipal ctrlPrincipal;
     private TelaBau telaBau;
     private Arma armaBau;
