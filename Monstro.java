@@ -10,7 +10,7 @@ public class Monstro extends Ser{
         super.setVidaAtual(10+(10*nivel));
         super.setVidaTotal(10+(10*nivel));
         this.forca = (int)((Math.random()*((0.2*super.getVidaTotal() - 0.10*super.getVidaTotal()) + 1))+0.10*20);
-        this.esquiva = 1.5 * nivel;
+        this.esquiva = 1.5 + 0.1*nivel;
         this.tipoElemento = tipoElemento;
     }
 

@@ -15,8 +15,8 @@ public class RpgComMVC {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        ControladorGeral ctrlP = new ControladorGeral();
-        ctrlP.inicio();
+        ControladorGeral ctrlG = new ControladorGeral();
+        ctrlG.inicio();
     }
     
 }

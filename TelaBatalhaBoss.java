@@ -163,10 +163,10 @@ public class TelaBatalhaBoss {
 
     public void mostraInicioBatalha() {
         System.out.println("");
-        System.out.println("Você entra numa sala escura...");
-        System.out.println("Começa a entrar mais afundo na sala quando de repente");
-        System.out.println("um monstro do tamanho de dois homens aparece na sua frente!!");
-        System.out.println("Imediatamente você pega seu cajado e se prepara para a batalha");
+        System.out.println("Você entra numa sala enorme de odor fetido...");
+        System.out.println("Ja sabe o que lhe espera, mas entra mais afundo na sala quando...");
+        System.out.println("Um DEMOGORGON do tamanho de cinco homens aparece na sua frente!!");
+        System.out.println("Imediatamente você pega seu cajado e se prepara para a batalha!");
         this.mostraMenuBatalha();
     }
 

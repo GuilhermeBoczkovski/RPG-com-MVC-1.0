@@ -179,4 +179,11 @@ public class TelaBatalha extends TelaEncontro{
     public void mostraExcecao(String message) {
         System.out.println(message);
     }
+
+    void mostraPassagemNivel(int nivelInicial, int nivelFinal) {
+        System.out.println("");
+        System.out.println("PARABENS!!");
+        System.out.println("O heroi subiu do nivel " + nivelInicial + " para o nivel " +  nivelFinal);
+        System.out.println("");
+    }
 }

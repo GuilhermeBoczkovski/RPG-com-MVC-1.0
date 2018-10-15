@@ -75,6 +75,7 @@ public class TelaBau {
             for(ConteudoTelaBau item: itensJogador){
                 String nome = item.item.getNome();
                 System.out.println(contador + "-" + nome);
+                contador++;
             }
         }
         System.out.println("========CONSUMIVEL========");
@@ -131,6 +132,7 @@ public class TelaBau {
             for(ConteudoTelaBau item: itens){
                 String nome = item.item.getNome();
                 System.out.println(contador + "-" + nome);
+                contador++;
             }
             mostraMenu();
         }

@@ -7,6 +7,7 @@ class ControladorBatalha {
     private ControladorPrincipal controladorPrincipal;
     private Monstro monstro;
     private TelaBatalha telaBatalha;
+    private int nivelInicial;
 
     public ControladorBatalha(ControladorPrincipal controladorPrincipal){
         this.telaBatalha = new TelaBatalha(this);
@@ -14,9 +15,8 @@ class ControladorBatalha {
     }
     
     public void atacar(ConteudoTelaBatalha conteudoTela){
-
         ConteudoTelaBatalha conteudoTelaAtaqueJogador = new ConteudoTelaBatalha();
-        Feitico feitico = this.controladorPrincipal.getJogador().getFeitico(conteudoTelaAtaqueJogador.indiceFeitico);
+        Feitico feitico = this.controladorPrincipal.getJogador().getFeitico(conteudoTela.indiceFeitico);
 
         conteudoTelaAtaqueJogador.feitico = feitico;
         int danoDoJogador = feitico.getDano();
@@ -25,7 +25,7 @@ class ControladorBatalha {
         TipoElemento elementoMonstro = this.monstro.getTipoElemento();
         if(!(elementoMonstro.equals(elementoFeitico))){
             if(elementoMonstro.equals(TipoElemento.PEDRA)){
-                
+
             }else if((elementoMonstro.equals(TipoElemento.FOGO) && elementoFeitico.equals(TipoElemento.AGUA)) || (elementoMonstro.equals(TipoElemento.AGUA) && elementoFeitico.equals(TipoElemento.GRAMA)) || (elementoMonstro.equals(TipoElemento.GRAMA) && elementoFeitico.equals(TipoElemento.FOGO))){
                 danoDoJogador = (int)(danoDoJogador*1.15);
             }else{
@@ -52,6 +52,9 @@ class ControladorBatalha {
     public void finalizaBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador){
         this.telaBatalha.mostraFimBatalha(conteudoTelaAtaqueJogador);
         this.controladorPrincipal.getJogador().ganhaExperiencia();
+        if(this.nivelInicial<this.controladorPrincipal.getJogador().getNivelInt()){
+            this.telaBatalha.mostraPassagemNivel(nivelInicial, this.controladorPrincipal.getJogador().getNivelInt());
+        }
         this.controladorPrincipal.getJogador().getDiario().addEvento(TipoEvento.BATALHA);
         this.controladorPrincipal.escolheEncontro();
         
@@ -133,6 +136,7 @@ class ControladorBatalha {
 
     public void iniciaEncontro(){
         this.geraMonstro();
+        this.nivelInicial = this.controladorPrincipal.getJogador().getNivelInt();
         this.telaBatalha.mostraInicioBatalha();
     }
 
