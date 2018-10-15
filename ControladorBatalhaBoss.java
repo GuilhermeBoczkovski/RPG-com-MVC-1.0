@@ -6,25 +6,29 @@ class ControladorBatalhaBoss {
 
     private ControladorPrincipal controladorPrincipal;
     private Monstro monstro;
-    private TelaBatalha telaBatalha;
+    private TelaBatalhaBoss telaBatalha;
 
-    public ControladorBatalhaBoss(ControladorPrincipal controladorPrincipal) {
+    public ControladorBatalhaBoss(ControladorPrincipal controladorPrincipal){
+        this.telaBatalha = new TelaBatalhaBoss(this);
         this.controladorPrincipal = controladorPrincipal;
         TipoElemento tipoElemento = TipoElemento.PEDRA;
         this.monstro = new Monstro(10, tipoElemento);
-        
     }
     
     public void atacar(ConteudoTelaBatalha conteudoTela){
+
         ConteudoTelaBatalha conteudoTelaAtaqueJogador = new ConteudoTelaBatalha();
         Feitico feitico = this.controladorPrincipal.getJogador().getFeitico(conteudoTelaAtaqueJogador.indiceFeitico);
+
         conteudoTelaAtaqueJogador.feitico = feitico;
         int danoDoJogador = feitico.getDano();
         danoDoJogador += this.controladorPrincipal.getJogador().getArma().getDano();
         TipoElemento elementoFeitico = feitico.getTipoElemento();
         TipoElemento elementoMonstro = this.monstro.getTipoElemento();
         if(!(elementoMonstro.equals(elementoFeitico))){
-            if((elementoMonstro.equals(TipoElemento.FOGO) && elementoFeitico.equals(TipoElemento.AGUA)) || (elementoMonstro.equals(TipoElemento.AGUA) && elementoFeitico.equals(TipoElemento.GRAMA)) || (elementoMonstro.equals(TipoElemento.GRAMA) && elementoFeitico.equals(TipoElemento.FOGO))){
+            if(elementoMonstro.equals(TipoElemento.PEDRA)){
+                
+            }else if((elementoMonstro.equals(TipoElemento.FOGO) && elementoFeitico.equals(TipoElemento.AGUA)) || (elementoMonstro.equals(TipoElemento.AGUA) && elementoFeitico.equals(TipoElemento.GRAMA)) || (elementoMonstro.equals(TipoElemento.GRAMA) && elementoFeitico.equals(TipoElemento.FOGO))){
                 danoDoJogador = (int)(danoDoJogador*1.15);
             }else{
                 danoDoJogador = (int)(danoDoJogador*0.85);
@@ -70,53 +74,63 @@ class ControladorBatalhaBoss {
     public void verFeiticos(ConteudoTelaBatalha conteudoTela){
         try{
             TipoElemento tipoElemento;
-            switch(conteudoTela.tipoInt){
-                case 1 :
+            switch(conteudoTela.tipoString){
+                case "1" :
                     tipoElemento = TipoElemento.FOGO;
                     break;
-                case 2 :
+                case "2" :
                     tipoElemento = TipoElemento.AGUA;
                     break;
-                case 3 :
+                case "3" :
                     tipoElemento = TipoElemento.GRAMA;
                     break;
-                case 4 :
+                case "4" :
                     tipoElemento = TipoElemento.PEDRA;
                     break;
                 default :
                     throw new NumeroInvalidoException();
             }
-            this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
-        }catch(Exception e){
-            System.out.println(e);
+            ArrayList<Feitico> feiticos = this.controladorPrincipal.getJogador().verFeiticos(tipoElemento);
+            ArrayList<ConteudoTelaBatalha> conteudoTelaS = this.compactar(feiticos);
+            telaBatalha.mostraFeiticos(conteudoTelaS);
+        }catch(NumeroInvalidoException e){
+            this.telaBatalha.mostraExcecao(e.getMessage());
+            telaBatalha.mostraMenuBatalha();
         }
     }
 
-    public void executaOpcao(int opcao1){
-        switch(opcao1){
-            case 1 :
-                this.telaBatalha.mostraMenuAtaque();
-                break;
-            case 2 :
-                this.analisarMonstro();
-                break;
-            case 3 :
-                this.telaBatalha.mostraMenuFeitico();
-                break;
-            case 4 :
-                this.verItens();
-                break;
-            case 5 :
-                this.telaBatalha.mostraMenuItens();
-                break;
-            case 6 :
-                this.verMeusAtributos();
-                break;
+    public void executaOpcao(String opcao){
+        try{
+            switch(opcao){
+                case "1" :
+                    this.telaBatalha.mostraMenuAtaque(compactar(this.controladorPrincipal.getJogador().getFeiticos()));
+                    break;
+                case "2" :
+                    this.analisarMonstro();
+                    break;
+                case "3" :
+                    this.telaBatalha.mostraMenuFeitico();
+                    break;
+                case "4" :
+                    this.verItens();
+                    break;
+                case "5" :
+                    this.telaBatalha.mostraMenuItens(compactar(this.controladorPrincipal.getJogador().getBolsa().verConsumiveis(),1));
+                    break;
+                case "6" :
+                    this.verMeusAtributos();
+                    break;
+                default:
+                    throw new NumeroInvalidoException();
+            }
+        }catch(NumeroInvalidoException e){
+            this.telaBatalha.mostraExcecao(e.getMessage());
+            this.telaBatalha.mostraMenuBatalha();
         }
     }
     
     public void iniciaEncontro() {
-        this.telaBatalha.mostraMenuBatalha();
+        this.telaBatalha.mostraInicioBatalha();
     }
 
     public ConteudoTelaBatalha compactar(Ser atacado, Ser atacante, int danoAtaque) {
@@ -145,8 +159,17 @@ class ControladorBatalhaBoss {
     }
     
     public void usarItem(int indice){
-        this.controladorPrincipal.getJogador().usarItem(indice);
-        this.telaBatalha.mostraMenuBatalha();
+        try{
+            if(indice < this.controladorPrincipal.getJogador().getBolsa().verConsumiveis().size()){
+                this.controladorPrincipal.getJogador().usarItem(indice);
+                this.telaBatalha.mostraMenuBatalha();
+            }else{
+                throw new NumeroInvalidoException();
+            }
+        }catch(NumeroInvalidoException e){
+            this.telaBatalha.mostraExcecao(e.getMessage());
+            this.telaBatalha.mostraMenuBatalha();
+        }
     }
     
     public void verMeusAtributos(){
@@ -158,6 +181,26 @@ class ControladorBatalhaBoss {
 
     public void gameOver() {
         this.controladorPrincipal.gameOver();
+    }
+    
+    private ArrayList<ConteudoTelaBatalha> compactar(ArrayList<Feitico> feiticos) {
+        ArrayList<ConteudoTelaBatalha> conteudoTelaS = new ArrayList();
+        for(Feitico feitico : feiticos){
+            ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
+            conteudoTela.feitico = feitico;
+            conteudoTelaS.add(conteudoTela);
+        }
+        return conteudoTelaS;
+    }
+    
+    private ArrayList<ConteudoTelaBatalha> compactar(ArrayList<Consumivel> consumiveis, int i) {
+        ArrayList<ConteudoTelaBatalha> conteudoTelaS = new ArrayList();
+        for(Consumivel consumivel : consumiveis){
+            ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
+            conteudoTela.consumivel = consumivel;
+            conteudoTelaS.add(conteudoTela);
+        }
+        return conteudoTelaS;
     }
     
 }
