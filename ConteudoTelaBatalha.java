@@ -4,7 +4,7 @@ class ConteudoTelaBatalha {
     
     public Monstro monstro;
     public Jogador jogador;
-    public int tipoInt;
+    public String tipoString;
     public int indiceFeitico;
     public int danoAtaque;
     public Feitico feitico;
