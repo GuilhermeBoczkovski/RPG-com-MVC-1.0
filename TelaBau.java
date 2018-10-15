@@ -2,7 +2,7 @@ package rpgcommvc;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class TelaBau {
+public class TelaBau extends TelaEncontro{
     private ControladorBau ctrlBau;
     private Scanner input;
     private boolean temArma;
