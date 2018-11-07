@@ -62,7 +62,7 @@ class ControladorBatalhaBoss {
 
     public void verItens(){
         Arma arma = this.controladorPrincipal.getJogador().getArma();
-        ArrayList<Consumivel> consumiveis = this.controladorPrincipal.getJogador().getBolsa().verConsumiveis();
+        ArrayList<Consumivel> consumiveis = this.controladorPrincipal.getJogador().getConsumiveisBolsa();
         ArrayList<ConteudoTelaBatalha> conteudoTelaS = new ArrayList();
         for(int i = 0; i < consumiveis.size(); i++){
             conteudoTelaS.add(compactar(consumiveis.get(i)));
@@ -115,7 +115,7 @@ class ControladorBatalhaBoss {
                     this.verItens();
                     break;
                 case "5" :
-                    this.telaBatalha.mostraMenuItens(compactar(this.controladorPrincipal.getJogador().getBolsa().verConsumiveis(),1));
+                    this.telaBatalha.mostraMenuItens(compactar(this.controladorPrincipal.getJogador().getConsumiveisBolsa(),1));
                     break;
                 case "6" :
                     this.verMeusAtributos();
@@ -160,7 +160,7 @@ class ControladorBatalhaBoss {
     
     public void usarItem(int indice){
         try{
-            if(indice < this.controladorPrincipal.getJogador().getBolsa().verConsumiveis().size()){
+            if(indice < this.controladorPrincipal.getJogador().getConsumiveisBolsa().size()){
                 this.controladorPrincipal.getJogador().usarItem(indice);
                 this.telaBatalha.mostraMenuBatalha();
             }else{

@@ -133,8 +133,11 @@ public class Jogador extends Ser implements IJogador {
     public ArrayList<Feitico> getFeiticos() {
         return this.feiticos;
     }
-    public Bolsa getBolsa(){
-        return this.bolsa;
+    public Consumivel getConsumivelBolsa(int indice){
+        return this.bolsa.getConsumivel(indice);
+    }
+    public ArrayList<Consumivel> getConsumiveisBolsa(){
+        return this.bolsa.verConsumiveis();
     }
     public Feitico getFeitico(int i){
         return this.feiticos.get(i);
@@ -158,6 +161,11 @@ public class Jogador extends Ser implements IJogador {
     public void setFeiticos(ArrayList<Feitico> feiticos) {
         this.feiticos = feiticos;
     }
-
-    
+/*------------ACTION------------*/
+    public void addConsumivelBolsa(Consumivel consumivel){
+        this.bolsa.addConsumivel(consumivel);
+    }
+    public void dellConsumivelBolsa(int indice){
+        this.bolsa.dellConsumivel(indice);
+    }
 }

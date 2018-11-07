@@ -50,6 +50,13 @@ class ControladorBatalha {
     }
     
     public void finalizaBatalha(ConteudoTelaBatalha conteudoTelaAtaqueJogador){
+        conteudoTelaAtaqueJogador.ganhouChave = false;
+        int rand = (int)(Math.random() * ((100 - 0) + 1));
+        //com nivel 13 a chance de receber a chave é 100%
+        if(!(this.controladorPrincipal.getJogador().getPossuiChave()) && rand <= 100*this.controladorPrincipal.getJogador().getNivelInt()/13){
+            this.controladorPrincipal.getJogador().setPossuiChave(true);
+            conteudoTelaAtaqueJogador.ganhouChave = true;
+        }
         this.telaBatalha.mostraFimBatalha(conteudoTelaAtaqueJogador);
         this.controladorPrincipal.getJogador().ganhaExperiencia();
         if(this.nivelInicial<this.controladorPrincipal.getJogador().getNivelInt()){
@@ -67,7 +74,7 @@ class ControladorBatalha {
 
     public void verItens(){
         Arma arma = this.controladorPrincipal.getJogador().getArma();
-        ArrayList<Consumivel> consumiveis = this.controladorPrincipal.getJogador().getBolsa().verConsumiveis();
+        ArrayList<Consumivel> consumiveis = this.controladorPrincipal.getJogador().getConsumiveisBolsa();
         ArrayList<ConteudoTelaBatalha> conteudoTelaS = new ArrayList();
         for(int i = 0; i < consumiveis.size(); i++){
             conteudoTelaS.add(compactar(consumiveis.get(i)));
@@ -120,7 +127,7 @@ class ControladorBatalha {
                     this.verItens();
                     break;
                 case "5" :
-                    this.telaBatalha.mostraMenuItens(compactar(this.controladorPrincipal.getJogador().getBolsa().verConsumiveis(),1));
+                    this.telaBatalha.mostraMenuItens(compactar(this.controladorPrincipal.getJogador().getConsumiveisBolsa(),1));
                     break;
                 case "6" :
                     this.verMeusAtributos();
@@ -167,7 +174,7 @@ class ControladorBatalha {
     
     public void usarItem(int indice){
         try{
-            if(indice < this.controladorPrincipal.getJogador().getBolsa().verConsumiveis().size()){
+            if(indice < this.controladorPrincipal.getJogador().getConsumiveisBolsa().size()){
                 this.controladorPrincipal.getJogador().usarItem(indice);
                 this.telaBatalha.mostraMenuBatalha();
             }else{
@@ -229,6 +236,27 @@ class ControladorBatalha {
         }
         /*CORRIGIR PROBABILIDADE DO TIPO ELEMENTO*/
         this.monstro = new Monstro(this.controladorPrincipal.getJogador().getNivelInt(), tipoElemento);
+    }
+
+    public boolean indiceFeiticoValido(String indiceFeiticoString) {
+        boolean indiceValido = false;
+        Integer cont = 0;
+        for(Feitico feitico : this.controladorPrincipal.getJogador().getFeiticos()){
+            if(indiceFeiticoString.equals(cont)){
+                indiceValido = true;
+            }
+            cont++;
+        }
+        if(indiceValido){
+            int indiceFeiticoInt = Integer.parseInt(indiceFeiticoString);
+            if(indiceFeiticoInt >= 0 && indiceFeiticoInt < this.controladorPrincipal.getJogador().getFeiticos().size()){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
     
 }

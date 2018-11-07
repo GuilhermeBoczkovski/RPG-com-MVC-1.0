@@ -114,7 +114,7 @@ class ControladorBau{
     }
     
     public void pegarConsumivel(){
-        this.ctrlPrincipal.getJogador().getBolsa().addConsumivel(consumivelBau);
+        this.ctrlPrincipal.getJogador().addConsumivelBolsa(consumivelBau);
         this.consumivelBau = null;
         this.temConsumivel = false;
         telaBau.update(compactarItensBoolean());
@@ -136,7 +136,7 @@ class ControladorBau{
     
     public ArrayList<ConteudoTelaBau> compactarItensJogador(){
         ArrayList<ConteudoTelaBau> conteudos = new ArrayList();
-        ArrayList<Consumivel> consumiveis = ctrlPrincipal.getJogador().getBolsa().verConsumiveis();
+        ArrayList<Consumivel> consumiveis = ctrlPrincipal.getJogador().getConsumiveisBolsa();
         for(Consumivel consumivel: consumiveis){
             ConteudoTelaBau conteudo = new ConteudoTelaBau();
             conteudo.item = consumivel;

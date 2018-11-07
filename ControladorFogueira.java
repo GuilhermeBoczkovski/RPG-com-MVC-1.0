@@ -11,7 +11,7 @@ public class ControladorFogueira {
     public ControladorFogueira(ControladorPrincipal ctrlEncontro){
         this.ctrlEncontro = ctrlEncontro;
         telaFogueira = new TelaFogueira(this);
-        this.itens = ctrlEncontro.getJogador().getBolsa().verConsumiveis();
+        this.itens = ctrlEncontro.getJogador().getConsumiveisBolsa();
         this.eventos = ctrlEncontro.getJogador().getDiario().verEventos();
         feiticos = ctrlEncontro.getJogador().getFeiticos();
     }
@@ -114,7 +114,7 @@ public class ControladorFogueira {
     }
     
     public void descartarItem(int escolha){
-        ctrlEncontro.getJogador().getBolsa().dellConsumivel(escolha);
+        ctrlEncontro.getJogador().dellConsumivelBolsa(escolha);
     }
     
     public void finalizaFogueira(){
