@@ -242,8 +242,10 @@ class ControladorBatalha {
         boolean indiceValido = false;
         Integer cont = 0;
         for(Feitico feitico : this.controladorPrincipal.getJogador().getFeiticos()){
-            if(indiceFeiticoString.equals(cont)){
+            String contString = Integer.toString(cont);
+            if(indiceFeiticoString.equals(contString)){
                 indiceValido = true;
+                break;
             }
             cont++;
         }
