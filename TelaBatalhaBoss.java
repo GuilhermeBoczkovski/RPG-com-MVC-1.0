@@ -118,11 +118,11 @@ public class TelaBatalhaBoss {
         System.out.println("Qual feitiço gostaria de usar?");
         System.out.println("(digite o indice do feitiço)");
         String indiceFeiticoString = teclado.nextLine();
-        if(this.controladorBatalha.indiceFeiticoValido(indiceFeiticoString)){
+        if(this.controladorBatalhaBoss.indiceFeiticoValido(indiceFeiticoString)){
             int indiceFeiticoInt = Integer.parseInt(indiceFeiticoString);
             ConteudoTelaBatalha conteudoTela = new ConteudoTelaBatalha();
             conteudoTela.indiceFeitico = indiceFeiticoInt;
-            this.controladorBatalha.atacar(conteudoTela);
+            this.controladorBatalhaBoss.atacar(conteudoTela);
         }else{
             System.out.println("Numero invalido, tente novamente...");
             this.mostraMenuAtaque(conteudoTelaS);
