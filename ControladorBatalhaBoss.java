@@ -203,4 +203,27 @@ class ControladorBatalhaBoss {
         return conteudoTelaS;
     }
     
+    public boolean indiceFeiticoValido(String indiceFeiticoString) {
+        boolean indiceValido = false;
+        Integer cont = 0;
+        for(Feitico feitico : this.controladorPrincipal.getJogador().getFeiticos()){
+            String contString = Integer.toString(cont);
+            if(indiceFeiticoString.equals(contString)){
+                indiceValido = true;
+                break;
+            }
+            cont++;
+        }
+        if(indiceValido){
+            int indiceFeiticoInt = Integer.parseInt(indiceFeiticoString);
+            if(indiceFeiticoInt >= 0 && indiceFeiticoInt < this.controladorPrincipal.getJogador().getFeiticos().size()){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
+    
 }
